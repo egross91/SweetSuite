@@ -25,7 +25,7 @@ git clone http://github.com/egross91/SweetSuite
 -  Install dependencies
 
 ```
-cd SweetSuit && npm install && bower update
+cd SweetSuit && npm install
 ```
 
 - Setup MongoDB directory
