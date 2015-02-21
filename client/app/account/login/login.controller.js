@@ -15,7 +15,7 @@ angular.module('sweetSuiteApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $location.url('/home');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
