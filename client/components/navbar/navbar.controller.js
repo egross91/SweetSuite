@@ -4,7 +4,7 @@ angular.module('sweetSuiteApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': '/home'
     },
       {
         'title': 'How It Works',
