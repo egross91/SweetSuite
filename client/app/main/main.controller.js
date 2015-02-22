@@ -17,6 +17,11 @@ angular.module('sweetSuiteApp')
       $scope.newThing = '';
     };
 
+    $scope.addDescToThing = function(thing) {
+      // TODO: Pop up box to allow the user to give a description for the thing in the to-do list.
+
+    };
+
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
     };
