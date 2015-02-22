@@ -5,19 +5,22 @@
       <div class="row" id="row0">
          <div class="col-sm-12">
            <div class="pull-right">
-               <div class="btn btn-success" id="create_list" onClick="list_info(), post_list()">
-                CREATE A TO-DO LIST
-               </div>
-               <div class="btn btn-success" id="view _list" onclick="show_image('assets/images/examplelist.png',400,400,'list')">
-                 VIEW EXAMPLE LIST
-               </div>
-               <div class="btn btn-success" id="remove_list" onclick="remove_lists()">REMOVE LISTS</div>
+             <div class="btn btn-success" id="create_list" onClick="list_info(), post_list()">
+               CREATE A TO-DO LIST
+             </div>
+             <div class="btn btn-success" id="view_list_btn" ng-click="toggleTodoList()">
+               VIEW EXAMPLE LIST
+             </div>
+             <div class="btn btn-success" id="remove_list" ng-click="hideExampleList()">
+               REMOVE LISTS
+             </div>
            </div>
-           </div>
-          </div>
+         </div>
+      </div>
       <div class="row">
         <div class="col-sm-12" id="row2">
-      </div>
+          <img src="../assets/images/examplelist.png" ng-show="showTodoList" alt="Example List"/>
         </div>
       </div>
+    </div>
 </div>

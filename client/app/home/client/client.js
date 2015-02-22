@@ -2,22 +2,9 @@
  * Created by juan on 2/21/15.
  */
 
-var exampleExists = false;
 var name;
 var tasks = [];
 
-function show_image(src, width, height, alt) {
-  if(!exampleExists) {
-    var img = document.createElement("img");
-    img.src = src;
-    img.width = width;
-    img.height = height;
-    img.alt = alt;
-
-    document.body.appendChild(img);
-  }
-  exampleExists = true;  //makes sure that the element only get appended once
-}
 
 // ask for name of list and then tasks
 function list_info() {
@@ -43,14 +30,4 @@ function post_list() {
   for(var i = 0; i < tasks.length-1; i++) {
     document.write(tasks[i] + "\n");
   }
-}
-
-
-function remove_lists() {
-  var images = document.getElementsByTagName('img');
-  var l = images.length;
-  for (var i = 0; i < l; i++) {
-    images[0].parentNode.removeChild(images[0]);
-  }
-  exampleExists = false;
 }
