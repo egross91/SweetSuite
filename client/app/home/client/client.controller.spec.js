@@ -43,4 +43,21 @@ describe('Controller: ClientCtrl', function() {
     scope.toggleTodoExampleImage();
     expect(scope.showTodoExampleImage).toBe(true);
   });
+
+  it('should have the $scope.showModal property as the default value', function() {
+    expect(scope.showModal).toBe(true);
+  });
+
+  it('should toggle the $scope.showModal property as false after delete()ing a thing', function() {
+    $httpBackend.flush();
+    scope.deleteThing(scope.awesomeThings[0]);
+    expect(scope.showModal).toBe(false);
+  });
+
+  it('should toggle the $scope.showModal property back to true after clicking a new thing in the list', function() {
+    $httpBackend.flush();
+    scope.deleteThing(scope.awesomeThings[0]);
+    scope.displayThingInfo();
+    expect(scope.showModal).toBe(true);
+  });
 })
