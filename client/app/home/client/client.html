@@ -3,20 +3,18 @@
   <div class="container">
     <div class="page">
       <div class="row" id="row0">
-         <div class="col-sm-12">
-           <div class="pull-right">
-             <div class="btn btn-success" id="create_list" onClick="list_info(), post_list()">
-               CREATE A TO-DO LIST
-             </div>
-             <div class="btn btn-success" id="view_list_btn" ng-click="toggleTodoList()">
-               VIEW EXAMPLE LIST
-             </div>
-             <div class="btn btn-success" id="remove_list" ng-click="hideExampleList()">
-               REMOVE LISTS
-             </div>
-           </div>
+         <div class="btn btn-success col-sm-2 col-sm-offset-0" id="create_list" onClick="list_info(), post_list()">
+           Create A TO-DO List
+         </div>
+         <div class="btn btn-success col-sm-2 col-sm-offset-3" id="view_list_btn" ng-click="toggleTodoList()">
+           View Example List
+         </div>
+         <div class="btn btn-success col-sm-2 col-sm-offset-3" id="remove_list" ng-click="hideExampleList()">
+           Remove Lists
          </div>
         <img class="center-block img-rounded" src="../assets/images/examplelist.png" ng-show="showTodoList" alt="Example List"/>
       </div>
     </div>
 </div>
+
+<div ng-include="'components/footer/footer.html'"></div>
