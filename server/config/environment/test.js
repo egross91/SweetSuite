@@ -5,6 +5,6 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/sweetsuite-test'
+    uri: 'mongodb://dev:dev@ds045011.mongolab.com:45011/sweetsuite'
   }
 };
