@@ -20,7 +20,7 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.displayThingInfo = function(thing, size) {
-      Modal.edit.view(thing, size);
+      Modal.edit.view(thing, size).apply();
     };
 
     $scope.toggleTodoExampleImage = function() {
