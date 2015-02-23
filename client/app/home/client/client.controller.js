@@ -5,6 +5,7 @@ angular.module('sweetSuiteApp')
     $scope.awesomeThings = [];
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
+    $scope.showModal = true;
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
@@ -12,7 +13,7 @@ angular.module('sweetSuiteApp')
     });
 
     $scope.addThing = function() {
-      if($scope.newThing === '') {
+      if($scope.newThing === undefined || $scope.newThing === '') {
         return;
       }
       $http.post('/api/things', { name: $scope.newThing });
@@ -20,7 +21,12 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.displayThingInfo = function(thing, size) {
-      Modal.edit.view(thing, size).apply();
+      if ($scope.showModal) {
+        Modal.edit.view(thing, size).apply();
+      }
+
+      // Bit flag to show the modal or not. Kinda hacky, ain't gonna lie.
+      $scope.showModal = true;
     };
 
     $scope.toggleTodoExampleImage = function() {
@@ -37,6 +43,9 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.deleteThing = function(thing) {
+      // If the user clicked the 'delete x,' then don't show the modal.
+      $scope.showModal = false;
+
       $http.delete('/api/things/' + thing._id);
     };
 
