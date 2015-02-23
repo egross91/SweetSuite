@@ -8,5 +8,4 @@ angular.module('sweetSuiteApp')
         templateUrl: 'app/how/how.html',
         controller: 'HowCtrl'
       });
-    console.log("THIS RUNS");
   });
