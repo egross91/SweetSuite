@@ -14,36 +14,19 @@ SweetSuite is a task manager webapp made for MaidSuite, a CRM & Scheduling platf
 https://trello.com/b/rVNOMTXF/sweetsuite
 
 ### How to install:
-From the command line/terminal...
+From the command line/terminal in the desired cloning directory
 
 - Clone the repo
-
 ```
-git clone http://github.com/egross91/SweetSuite
+    git clone http://github.com/egross91/SweetSuite
 ```
 
 -  Install dependencies
-
 ```
-cd SweetSuit && npm install && bower update
-```
-
-- Setup MongoDB directory
-
-```
-mkdir ./data/db/
+    cd SweetSuit && npm install && bower install && bower update
 ```
 
--  Run MongoDB
-
+- In a new command line/terminal: to serve the app
 ```
-mongod --dbpath ./data/db
-```
-
-- In a new command line/terminal
-
-- Run and serve the app
-
-```
-grunt serve
+    grunt serve
 ```
