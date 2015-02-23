@@ -23,7 +23,41 @@ angular.module('sweetSuiteApp')
     }
 
     // Public API here
-    return {
+    return  {
+
+      edit: {
+        view: function(thing, size) {
+          return function () {
+            var viewModal;
+
+            viewModal = openModal({
+              modal: {
+                dimissable: true,
+                title: thing.name,
+                html: thing.info,
+                size: size,
+                buttons: [{
+                  classes: 'btn-info',
+                  text: 'Ok',
+                  click: function (e) {
+                    viewModal.close(e);
+                  }
+                }, {
+                  classes: 'btn-default',
+                  text: 'Cancel',
+                  click: function (e) {
+                    viewModal.dismiss(e);
+                  }
+                }]
+              }
+            }, null);
+
+            viewModal.result.then(function(event) {
+
+            });
+          }
+        }
+      },
 
       /* Confirmation modals */
       confirm: {

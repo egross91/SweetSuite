@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ClientCtrl', function ($scope, socket, $http) {
+  .controller('ClientCtrl', function ($scope, socket, $http, Modal) {
     $scope.awesomeThings = [];
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
@@ -17,6 +17,10 @@ angular.module('sweetSuiteApp')
       }
       $http.post('/api/things', { name: $scope.newThing });
       $scope.newThing = '';
+    };
+
+    $scope.displayThingInfo = function(thing, size) {
+      Modal.edit.view(thing, size);
     };
 
     $scope.toggleTodoExampleImage = function() {
