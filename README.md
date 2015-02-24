@@ -30,3 +30,42 @@ From the command line/terminal in the desired cloning directory
 ```
     grunt serve
 ```
+
+## Running tests:
+- Make sure to start the site before running *any* tests
+```
+    grunt serve
+```
+
+#### Running Protractor tests:
+- Install protractor:
+```
+    npm install -g protractor
+```
+
+- Update selenium
+```
+    webdriver-manager update
+```
+
+- Run selenium (new terminal/command line)
+```
+    webdriver-manager start
+```
+
+- Run protractor
+```
+    protractor protractor.conf.js
+```
+
+
+#### Running server tests:
+```
+    grunt test:server
+```
+
+
+#### Running client tests:
+```
+    grunt test:client
+```
