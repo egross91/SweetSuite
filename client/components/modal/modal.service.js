@@ -26,10 +26,9 @@ angular.module('sweetSuiteApp')
     return  {
 
       edit: {
-        view: function(thing, size) {
+        view: function(callback, thing, size) {
           return function () {
-            var args = Array.prototype.slice.call(arguments),
-            viewModal;
+            var viewModal;
 
             viewModal = openModal({
               modal: {
@@ -54,8 +53,7 @@ angular.module('sweetSuiteApp')
             }, null);
 
             viewModal.result.then(function(event) {
-              // TODO: Have the apply work here with callback.
-              // self.apply(event, args)
+              callback.call(event, document.getElementById('modalHtmlDiv').innerHTML);
             });
           }
         }

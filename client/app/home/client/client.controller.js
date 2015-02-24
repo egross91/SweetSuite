@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ClientCtrl', function ($scope, socket, $http, Modal) {
+  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _) {
     $scope.awesomeThings = [];
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
@@ -13,6 +13,11 @@ angular.module('sweetSuiteApp')
     });
 
     $scope.addThing = function() {
+      // Check for duplicates
+      if ($scope.containsDuplicates($scope.newThing)) {
+        return;
+      }
+
       if($scope.newThing === undefined || $scope.newThing === '') {
         return;
       }
@@ -21,8 +26,13 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.displayThingInfo = function(thing, size) {
+      // Show the modal if user didn't click the delete 'x'.
       if ($scope.showModal) {
-        Modal.edit.view(thing, size).apply();
+
+        // Callback function to grab the text from the modal and store it into the appropriate thing.
+        Modal.edit.view(function(event) {
+          thing.info = event;
+        }, thing, size).apply();
       }
 
       // Bit flag to show the modal or not. Kinda hacky, ain't gonna lie.
@@ -43,7 +53,7 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.deleteThing = function(thing) {
-      // If the user clicked the 'delete x,' then don't show the modal.
+      // If the user clicked the delete 'x,' then don't show the modal.
       $scope.showModal = false;
 
       $http.delete('/api/things/' + thing._id);
@@ -52,4 +62,17 @@ angular.module('sweetSuiteApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    $scope.containsDuplicates = function(name) {
+      var names = _.pluck($scope.awesomeThings, 'name');
+      var ii;
+
+      for (ii = 0; ii < names.length; ++ii) {
+        if (name === names[ii]) {
+          return true;
+        }
+      }
+
+      return false;
+    }
   });
