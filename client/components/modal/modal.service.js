@@ -36,9 +36,10 @@ angular.module('sweetSuiteApp')
                 title: thing.name,
                 html: thing.info,
                 size: size,
+                editable: true,
                 buttons: [{
                   classes: 'btn-info',
-                  text: 'Ok',
+                  text: 'OK',
                   click: function (e) {
                     viewModal.close(e);
                   }
@@ -53,7 +54,19 @@ angular.module('sweetSuiteApp')
             }, null);
 
             viewModal.result.then(function(event) {
-              callback.call(event, document.getElementById('modalHtmlDiv').innerHTML);
+              var modified = document.getElementById('modalHtmlTextArea');
+              var result = null;
+              if (modified) {
+                result = modified.value;
+              }
+              else if ((modified = document.getElementById('modalTextP'))) {
+                result = modified.innerText;
+              }
+              else {
+                result = '';
+              }
+
+              callback.call(event, result.trim());
             });
           }
         }

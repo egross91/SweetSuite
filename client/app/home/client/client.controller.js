@@ -28,7 +28,6 @@ angular.module('sweetSuiteApp')
     $scope.displayThingInfo = function(thing, size) {
       // Show the modal if user didn't click the delete 'x'.
       if ($scope.showModal) {
-
         // Callback function to grab the text from the modal and store it into the appropriate thing.
         Modal.edit.view(function(event) {
           thing.info = event;
