@@ -23,7 +23,7 @@ From the command line/terminal in the desired cloning directory
 
 -  Install dependencies
 ```
-    cd SweetSuit && npm install && bower install && bower update
+    cd SweetSuite && npm install && bower install && bower update
 ```
 
 - In a new command line/terminal: to serve the app
