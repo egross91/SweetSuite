@@ -22,6 +22,15 @@ var MainPage = function() {
   this.createTodoListBtn = this.clientBtnListEl.element(by.id('createListBtn'));
   this.viewExampleListBtn = this.clientBtnListEl.element(by.id('viewExampleListBtn'));
   this.removeListsBtn = this.clientBtnListEl.element(by.id('removeListsBtn'));
+
+  this.thingListContainerEl = element(by.id('todoContainer'));
+  this.thingsEls = this.thingListContainerEl.all(by.css('ul'));
+
+  this.todoEditModalEl = element(by.id('todoEditModal'));
+  this.todoDescriptionLbl = this.todoEditModalEl.element(by.css('label'));
+
+  this.todoEditModalFooterEl = this.todoEditModalEl.element(by.id('modalFooter'));
+  this.modalBtns = this.todoEditModalFooterEl.all(by.id('modalBtn'));
 };
 
 module.exports = new MainPage();

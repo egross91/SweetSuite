@@ -17,7 +17,6 @@ angular.module('sweetSuiteApp')
       if ($scope.containsDuplicates($scope.newThing)) {
         return;
       }
-
       if($scope.newThing === undefined || $scope.newThing === '') {
         return;
       }
@@ -56,6 +55,7 @@ angular.module('sweetSuiteApp')
       $scope.showModal = false;
 
       $http.delete('/api/things/' + thing._id);
+      --$scope.thingCount;
     };
 
     $scope.$on('$destroy', function () {

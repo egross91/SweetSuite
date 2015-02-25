@@ -16,12 +16,12 @@
       </div>
     </div>
 
-    <div class="container" ng-show="showTodoExample">
+    <div id="todoContainer" class="container" ng-show="showTodoExample">
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">TODO List:</h1>
-          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-            <li><a href="#" ng-click="displayThingInfo(thing)">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+          <ul name="allTheThings" class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+            <li><a href="#" id="thing{{thing._id}}" ng-click="displayThingInfo(thing)">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
           </ul>
         </div>
       </div>
@@ -39,6 +39,6 @@
   </div>
 
 <div ng-include="'components/footer/footer.html'"></div>
-<div class="hidden" id="infoModal">
+<div class="hidden" id="todoEditModal">
   <div ng-include="'components/modal/modal.html'"></div>
 </div>

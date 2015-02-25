@@ -4,12 +4,11 @@
 </div>
 <div class="modal-body scrollable-content">
   <div class="form-group">
-    <label >Todo Description:</label>
+    <label>Todo Description:</label>
     <p id="modalTextP" ng-if="modal.text" ng-bind="modal.text" contenteditable="{{modal.editable}}"></p>
     <textarea id="modalHtmlTextArea" class="form-control scrollable-content" ng-if="modal.html || modal.editable" ng-bind-html="modal.html" contenteditable="{{modal.editable}}" placeholder="Enter description here..."/>
-    <!--<input ng-model="modal.description" class="form-control" ng-if="!modal.text && !modal.html" type="text" placeholder="Enter description here..."/>-->
   </div>
 </div>
-<div class="modal-footer">
-  <button ng-repeat="button in modal.buttons" ng-class="button.classes" ng-click="button.click($event)" ng-bind="button.text" class="btn"></button>
+<div id="modalFooter" class="modal-footer">
+  <button id="modalBtn" ng-repeat="button in modal.buttons" ng-class="button.classes" ng-click="button.click($event)" ng-bind="button.text" class="btn"></button>
 </div>
