@@ -71,8 +71,8 @@ angular.module('sweetSuiteApp')
     });
 
     $scope.containsDuplicates = function(name) {
-      var names = _.pluck($scope.awesomeThings, 'name');
-      var ii;
+      var names = _.pluck($scope.awesomeThings, 'name')
+        , ii;
 
       for (ii = 0; ii < names.length; ++ii) {
         if (name === names[ii]) {

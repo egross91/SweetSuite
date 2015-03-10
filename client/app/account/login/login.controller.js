@@ -14,8 +14,17 @@ angular.module('sweetSuiteApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
-          $location.url('/client');
+          Auth.isLoggedInAsync(function(isLoggedIn) {
+            if (isLoggedIn) {
+              if (Auth.isAdmin()) {
+                $location.url('/admin');
+              }
+              else {
+                // Logged in, redirect to home
+                $location.url('/client');
+              }
+            }
+          });
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

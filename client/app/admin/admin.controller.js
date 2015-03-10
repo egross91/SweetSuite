@@ -3,6 +3,8 @@
 angular.module('sweetSuiteApp')
   .controller('AdminCtrl', function ($scope, $http, Auth, User) {
 
+    // Store the admin that is currently viewing the page
+    $scope.me = User.get();
     // Use the User $resource to fetch all users
     $scope.users = User.query();
 
@@ -14,4 +16,12 @@ angular.module('sweetSuiteApp')
         }
       });
     };
+
+    $scope.isAdmin = function(user) {
+      return user.role === 'admin';
+    };
+
+    $scope.isCurrentUser = function(user) {
+      return user.email === $scope.me.email;
+    }
   });
