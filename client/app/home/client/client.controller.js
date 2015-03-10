@@ -7,10 +7,17 @@ angular.module('sweetSuiteApp')
     $scope.showTodoExample = false;
     $scope.showModal = true;
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
+    /**
+     * PRIVATE METHODS
+     */
+    var refreshTodoList = function() {
+      $http.get('/api/things').success(function (awesomeThings) {
+        $scope.awesomeThings = awesomeThings;
+        socket.syncUpdates('thing', $scope.awesomeThings);
+      });
+    }
+
+    refreshTodoList();
 
     $scope.addThing = function() {
       // Check for duplicates
@@ -20,7 +27,8 @@ angular.module('sweetSuiteApp')
       if($scope.newThing === undefined || $scope.newThing === '') {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
+
+      $http.post('api/things', { name: $scope.newThing } );
       $scope.newThing = '';
     };
 
@@ -28,8 +36,9 @@ angular.module('sweetSuiteApp')
       // Show the modal if user didn't click the delete 'x'.
       if ($scope.showModal) {
         // Callback function to grab the text from the modal and store it into the appropriate thing.
-        Modal.edit.view(function(event) {
-          thing.info = event;
+        Modal.edit.todo(function(todoDesc, todoName) {
+          thing.info = todoDesc;
+          $http.put('/api/things/' + thing._id, { info: todoDesc, name: todoName });
         }, thing, size).apply();
       }
 
@@ -55,7 +64,6 @@ angular.module('sweetSuiteApp')
       $scope.showModal = false;
 
       $http.delete('/api/things/' + thing._id);
-      --$scope.thingCount;
     };
 
     $scope.$on('$destroy', function () {

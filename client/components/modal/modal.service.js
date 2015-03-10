@@ -26,7 +26,7 @@ angular.module('sweetSuiteApp')
     return  {
 
       edit: {
-        view: function(callback, thing, size) {
+        todo: function(callback, thing, size) {
           return function () {
             var viewModal;
 
@@ -54,8 +54,9 @@ angular.module('sweetSuiteApp')
             }, null);
 
             viewModal.result.then(function(event) {
-              var modified = document.getElementById('modalHtmlTextArea');
-              var result = null;
+              var modified = document.getElementById('modalHtmlTextArea')
+                , result = null;
+
               if (modified) {
                 result = modified.value;
               }
@@ -66,7 +67,7 @@ angular.module('sweetSuiteApp')
                 result = '';
               }
 
-              callback.call(event, result.trim());
+              callback.apply(event, [result.trim(), thing.name]);
             });
           }
         }
