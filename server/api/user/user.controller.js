@@ -80,6 +80,26 @@ exports.changePassword = function(req, res, next) {
 };
 
 /**
+ * Change a user's role
+ */
+exports.changeRole = function(req, res, next) {
+  var userId = String(req.body.id);
+  var newRole = String(req.body.newRole);
+
+  User.findById(userId, function(err, user) {
+    if(user) {
+      user.role = newRole;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+    } else {
+      res.send(400);
+    }
+  });
+};
+
+/**
  * Get my info
  */
 exports.me = function(req, res, next) {

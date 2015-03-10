@@ -92,6 +92,19 @@ angular.module('sweetSuiteApp')
         }).$promise;
       },
 
+      changeRole: function(newRole, changeUser, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeRole({ id: 'admin' }, {
+            newRole: newRole,
+            id: changeUser._id
+          }, function(user) {
+            return cb(user);
+          }, function(err) {
+            return cb(err);
+          }).$promise;
+      },
+
       /**
        * Gets all available info on authenticated user
        *

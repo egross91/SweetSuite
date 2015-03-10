@@ -12,6 +12,13 @@ angular.module('sweetSuiteApp')
           controller:'password'
         }
       },
+      changeRole: {
+        method: 'PUT',
+        params: {
+          id:'admin',
+          controller:'role'
+        }
+      },
       get: {
         method: 'GET',
         params: {

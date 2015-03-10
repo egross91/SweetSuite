@@ -7,6 +7,21 @@ angular.module('sweetSuiteApp')
     $scope.me = User.get();
     // Use the User $resource to fetch all users
     $scope.users = User.query();
+    $scope.errors = {};
+
+    /**
+     * PRIVATE API
+     */
+    var changeRole = function(newRole, user) {
+      Auth.changeRole(newRole, user)
+        .then(function() {
+          $scope.message = 'success';
+        })
+        .catch(function() {
+          $scope.errors.others = 'can\'t do dat';
+          $scope.message = '';
+        });
+    };
 
     $scope.delete = function(user) {
       User.remove({ id: user._id });
@@ -22,6 +37,24 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.isCurrentUser = function(user) {
-      return user.email === $scope.me.email;
+      return user._id === $scope.me._id;
+    };
+
+    $scope.makeAdmin = function(user) {
+      changeRole('admin', user);
+      angular.forEach($scope.users, function(u, i) {
+        if (u === user) {
+          $scope.users[i].role = 'admin';
+        }
+      });
+    };
+
+    $scope.demoteAdmin = function(admin) {
+      changeRole('user', admin);
+      angular.forEach($scope.users, function(u, i) {
+        if (u === admin) {
+          $scope.users[i].role = 'user';
+        }
+      });
     }
   });
