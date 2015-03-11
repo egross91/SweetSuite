@@ -48,6 +48,8 @@ angular.module('sweetSuiteApp', [
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/login');
+        } else if (next.url === '/admin' && !Auth.isAdmin()) {
+          $location.path('/');
         }
       });
     });

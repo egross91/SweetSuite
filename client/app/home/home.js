@@ -6,11 +6,13 @@ angular.module('sweetSuiteApp')
       .state('ClientHome', {
         url: '/client',
         templateUrl: 'app/home/client/client.html',
-        controller: 'ClientCtrl'
+        controller: 'ClientCtrl',
+        authenticate: true
       })
       .state('MaidHome', {
-      url: '/maid',
-      templateUrl: 'app/home/maid/maid.html',
-      controller: 'MaidCtrl'
+        url: '/maid',
+        templateUrl: 'app/home/maid/maid.html',
+        controller: 'MaidCtrl',
+        authenticate: true
     });
   });
