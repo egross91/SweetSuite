@@ -47,7 +47,7 @@ angular.module('sweetSuiteApp', [
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/login');
-        } else if (next.url === '/admin/*' && !Auth.isAdmin()) {
+        } else if ((next.url === '/admin/users' || next.url === '/admin/todos') && !Auth.isAdmin()) {
           $location.path('/');
         } else if (next.url === '/client' && Auth.isAdmin()) {
           $location.path('/');
