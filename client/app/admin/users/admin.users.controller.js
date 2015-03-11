@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  .controller('AdminUsersCtrl', function ($scope, $http, Auth, User) {
 
     // Store the admin that is currently viewing the page
     $scope.me = User.get();
