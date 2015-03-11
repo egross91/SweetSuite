@@ -2,14 +2,11 @@
 
 angular.module('sweetSuiteApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
+    // Add code here if you want it to show for everyone all the time.
     $scope.menu = [{
       'title': 'Home',
       'link': '/home'
-    },
-      {
-        'title': 'How It Works',
-        'link': '/how'
-      }];
+    }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
