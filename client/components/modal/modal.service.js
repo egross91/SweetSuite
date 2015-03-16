@@ -26,9 +26,10 @@ angular.module('sweetSuiteApp')
     return  {
 
       edit: {
-        todo: function(callback, thing, size) {
+        todo: function(cb, thing, size) {
           return function () {
-            var viewModal;
+            var viewModal
+              , callback = cb || angular.noop;
 
             viewModal = openModal({
               modal: {
@@ -37,6 +38,8 @@ angular.module('sweetSuiteApp')
                 html: thing.info,
                 size: size,
                 editable: true,
+                description: 'Todo Description',
+                textarea: true,
                 buttons: [{
                   classes: 'btn-info',
                   text: 'OK',
@@ -68,6 +71,46 @@ angular.module('sweetSuiteApp')
               }
 
               callback.apply(event, [result.trim(), thing.name]);
+            });
+          }
+        },
+
+        create: function(cb, size) {
+          return function() {
+            var viewModal
+              , callback = cb || angular.noop;
+
+            viewModal = openModal({
+              modal: {
+                dismissable: true,
+                title: 'Create New List',
+                html: '',
+                size: size,
+                editable: true,
+                description: 'List Name',
+                paragraph: true,
+                buttons: [{
+                  classes: 'btn-info',
+                  text: 'Done',
+                  click: function(e) {
+                    viewModal.close(e);
+                  }
+                }, {
+                  classes: 'btn-default',
+                  text: 'Cancel',
+                  click: function(e) {
+                    viewModal.dismiss(e);
+                  }
+                }]
+              }
+            }, null);
+
+            viewModal.result.then(function(event) {
+              var result = document.getElementById('modalTextP');
+
+              result = (!result || result.innerText === '') ? 'Default' : result.innerText;
+
+              callback.apply(event, [result.trim()]);
             });
           }
         }

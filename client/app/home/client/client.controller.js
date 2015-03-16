@@ -24,8 +24,10 @@ angular.module('sweetSuiteApp')
       list.todos.push({ name: newTodo, info: '' });
     };
 
-    $scope.createNewTodoList = function(name) {
-      $scope.client.lists.add({ title: name, todos: [] });
+    $scope.createNewTodoList = function(size) {
+      Modal.edit.create(function(name) {
+        $scope.client.lists.push({ title: name, todos: [] });
+      }, size).apply();
     };
 
     $scope.displayThingInfo = function(thing, size) {

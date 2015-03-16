@@ -3,17 +3,20 @@
   <div class="container">
     <div class="page">
       <div class="row" id="btnListsDiv">
-        <div class="btn btn-info col-sm-2 col-sm-offset-0" id="createListBtn" ng-click="toggleTodoExample()">
-          Create A TO-DO List
+        <div class="btn btn-success" id="createListBtn" ng-click="createNewTodoList()">
+          Create New List
         </div>
-        <div class="btn btn-info col-sm-2 col-sm-offset-1" id="viewExampleListBtn" ng-click="toggleTodoExampleImage()">
+        <div class="btn btn-primary" id="viewListsBtn" ng-click="toggleTodoExample()">
+          View Lists
+        </div>
+        <div class="btn btn-primary" id="viewExampleListBtn" ng-click="toggleTodoExampleImage()">
           View Example List
         </div>
-        <div class="btn btn-info col-sm-2 col-sm-offset-1" id="removeListsBtn" ng-click="hideExampleLists()">
+        <div class="btn btn-primary" id="removeListsBtn" ng-click="hideExampleLists()">
           Hide All
         </div>
-        <div class="btn btn-info col-sm-2 col-sm-offset-1" id="saveListsBtn" ng-click="saveChanges()">
-          Save Lists
+        <div class="btn btn-success" id="saveListsBtn" ng-click="saveChanges()">
+          Save Changes
         </div>
         <img class="center-block img-rounded" src="../assets/images/examplelist.png" ng-show="showTodoExampleImage" alt="Example List"/>
       </div>

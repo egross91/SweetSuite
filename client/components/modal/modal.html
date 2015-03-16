@@ -4,9 +4,9 @@
 </div>
 <div class="modal-body scrollable-content">
   <div class="form-group">
-    <label>Todo Description:</label>
-    <p id="modalTextP" ng-if="modal.text" ng-bind="modal.text" contenteditable="{{modal.editable}}"></p>
-    <textarea id="modalHtmlTextArea" class="form-control scrollable-content" ng-if="modal.html || modal.editable" ng-bind-html="modal.html" contenteditable="{{modal.editable}}" placeholder="Enter description here..."/>
+    <label>{{modal.description}}:</label>
+    <p id="modalTextP" class="form-control" ng-if="modal.paragraph" ng-bind="modal.text" contenteditable="{{modal.editable}}"></p>
+    <textarea id="modalHtmlTextArea" class="form-control scrollable-content" ng-if="modal.textarea" ng-bind-html="modal.html" contenteditable="{{modal.editable}}" placeholder="Enter description here..."></textarea>
   </div>
 </div>
 <div id="modalFooter" class="modal-footer">
