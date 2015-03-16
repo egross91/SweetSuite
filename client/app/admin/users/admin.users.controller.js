@@ -36,8 +36,30 @@ angular.module('sweetSuiteApp')
       return user.role === 'admin';
     };
 
+    $scope.isMaid = function(user){
+      return user.role=== 'maid';
+    };
+
     $scope.isCurrentUser = function(user) {
       return user._id === $scope.me._id;
+    };
+
+    $scope.makeMaid= function(user){
+      changeRole('maid',user);
+      angular.forEach($scope.users, function(u, i) {
+        if (u === user) {
+          $scope.users[i].role = 'maid';
+        }
+      });
+    };
+
+    $scope.demoteMaid = function(maid){
+      changeRole('user',maid);
+      angular.forEach($scope.users, function(u, i) {
+        if (u === maid) {
+          $scope.users[i].role = 'user';
+        }
+      });
     };
 
     $scope.makeAdmin = function(user) {
