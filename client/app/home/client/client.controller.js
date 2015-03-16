@@ -24,6 +24,10 @@ angular.module('sweetSuiteApp')
       list.todos.push({ name: newTodo, info: '' });
     };
 
+    $scope.createNewTodoList = function(name) {
+      $scope.client.lists.add({ title: name, todos: [] });
+    };
+
     $scope.displayThingInfo = function(thing, size) {
       // Show the modal if user didn't click the delete 'x'.
       if ($scope.showModal) {
