@@ -1,35 +1,31 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _) {
-    $scope.awesomeThings = [];
+  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _, User) {
+    $scope.client = User.get();
+    $scope.client.lists;
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
     $scope.showModal = true;
 
-    /**
-     * PRIVATE METHODS
-     */
-    var refreshTodoList = function() {
-      $http.get('/api/things').success(function (awesomeThings) {
-        $scope.awesomeThings = awesomeThings;
-        socket.syncUpdates('thing', $scope.awesomeThings);
-      });
-    }
+    //$http.get('/api/things').success(function (awesomeThings) {
+    //  $scope.awesomeThings = awesomeThings;
+    //  socket.syncUpdates('thing', $scope.awesomeThings);
+    //});
 
-    refreshTodoList();
-
-    $scope.addThing = function() {
+    $scope.addTodo = function(list) {
       // Check for duplicates
-      if ($scope.containsDuplicates($scope.newThing)) {
+      if ($scope.containsDuplicates(list, $scope.newTodo)) {
         return;
       }
-      if($scope.newThing === undefined || $scope.newThing === '') {
+      if($scope.newTodo === undefined || $scope.newTodo === '') {
         return;
       }
 
-      $http.post('api/things', { name: $scope.newThing } );
-      $scope.newThing = '';
+      //$http.post('api/things', { name: $scope.newThing } );
+      list.add({ name: $scope.newTodo, info: '' });
+      $scope.client.save();
+      $scope.newTodo = '';
     };
 
     $scope.displayThingInfo = function(thing, size) {
@@ -70,8 +66,8 @@ angular.module('sweetSuiteApp')
       socket.unsyncUpdates('thing');
     });
 
-    $scope.containsDuplicates = function(name) {
-      var names = _.pluck($scope.awesomeThings, 'name')
+    $scope.containsDuplicates = function(list, name) {
+      var names = _.pluck(list, 'name')
         , ii;
 
       for (ii = 0; ii < names.length; ++ii) {
