@@ -57,6 +57,14 @@ angular.module('sweetSuiteApp')
       $scope.showTodoExample = false;
     };
 
+    $scope.deleteList = function(list) {
+      angular.forEach($scope.client.lists, function(l, i) {
+        if (list.$$hashKey === l.$$hashKey) {
+          $scope.client.lists.splice(i, 1);
+        }
+      });
+    };
+
     $scope.deleteThing = function(thing) {
       // If the user clicked the delete 'x,' then don't show the modal.
       $scope.showModal = false;
