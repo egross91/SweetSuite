@@ -19,6 +19,9 @@ angular.module('sweetSuiteApp')
               if (Auth.isAdmin()) {
                 $location.url('/admin');
               }
+              else if(Auth.isMaid()){
+                $location.url('/maid');
+              }
               else {
                 // Logged in, redirect to home
                 $location.url('/client');

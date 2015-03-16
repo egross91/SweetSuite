@@ -161,6 +161,10 @@ angular.module('sweetSuiteApp')
         return currentUser.role === 'admin';
       },
 
+      isMaid: function(){
+        return currentUser.role==='maid';
+      },
+
       /**
        * Get auth token
        */
