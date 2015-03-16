@@ -3,24 +3,27 @@
   <div class="container">
     <div class="page">
       <div class="row" id="btnListsDiv">
-         <div class="btn btn-info col-sm-2 col-sm-offset-0" id="createListBtn" ng-click="toggleTodoExample()">
-           Create A TO-DO List
-         </div>
-         <div class="btn btn-info col-sm-2 col-sm-offset-3" id="viewExampleListBtn" ng-click="toggleTodoExampleImage()">
-           View Example List
-         </div>
-         <div class="btn btn-info col-sm-2 col-sm-offset-3" id="removeListsBtn" ng-click="hideExampleLists()">
-           Remove Lists
-         </div>
+        <div class="btn btn-info col-sm-2 col-sm-offset-0" id="createListBtn" ng-click="toggleTodoExample()">
+          Create A TO-DO List
+        </div>
+        <div class="btn btn-info col-sm-2 col-sm-offset-1" id="viewExampleListBtn" ng-click="toggleTodoExampleImage()">
+          View Example List
+        </div>
+        <div class="btn btn-info col-sm-2 col-sm-offset-1" id="removeListsBtn" ng-click="hideExampleLists()">
+          Hide All
+        </div>
+        <div class="btn btn-info col-sm-2 col-sm-offset-1" id="saveListsBtn" ng-click="saveChanges()">
+          Save Lists
+        </div>
         <img class="center-block img-rounded" src="../assets/images/examplelist.png" ng-show="showTodoExampleImage" alt="Example List"/>
       </div>
     </div>
 
     <div id="todoContainer" class="container" ng-show="showTodoExample">
-      <div name="todoList" class="row" ng-repeat="todoList in client.lists">
+      <div class="row" ng-repeat="todoList in client.lists">
         <div class="col-lg-12">
-          <h1 class="page-header">{{todoList.title}}</h1>
-          <ul name="todos" class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos">
+          <h1 id="todoList{{todoList.title}}" ng-click="focusList(todoList.title)"><a href="" class="page-header">{{todoList.title}}</a></h1>
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos">
             <li><a href="#" ng-click="displayThingInfo(todo)">{{todo.name}}<button type="button" class="close" ng-click="deleteThing(todo)">&times;</button></a></li>
           </ul>
         </div>
@@ -29,7 +32,7 @@
           <p class="input-group">
             <input type="text" class="form-control" placeholder="Add a new to-do here." ng-model="newTodo">
           <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary" ng-click="addTodo(todoList)">Add New</button>
+            <button type="submit" class="btn btn-primary" ng-click="addTodo(todoList, newTodo)">Add New</button>
           </span>
           </p>
         </form>

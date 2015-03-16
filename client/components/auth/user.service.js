@@ -19,6 +19,12 @@ angular.module('sweetSuiteApp')
           controller:'role'
         }
       },
+      updateUserLists: {
+        method: 'PUT',
+        params: {
+          controller: 'lists'
+        }
+      },
       get: {
         method: 'GET',
         params: {

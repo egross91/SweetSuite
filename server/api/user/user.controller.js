@@ -100,6 +100,26 @@ exports.changeRole = function(req, res, next) {
 };
 
 /**
+ * Update current user's to-do lists.
+ */
+exports.updateUserLists = function(req, res, next) {
+  var userId = String(req.user._id);
+  var newLists = req.body.newLists;
+
+  User.findById(userId, function(err, user) {
+    if (user) {
+      user.lists = newLists;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+    } else {
+      res.send(400);
+    }
+  });
+};
+
+/**
  * Get my info
  */
 exports.me = function(req, res, next) {

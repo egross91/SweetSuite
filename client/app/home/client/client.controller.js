@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _, User) {
+  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _, User, $location, $anchorScroll, Auth) {
     $scope.client = User.get();
-    $scope.client.lists;
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
     $scope.showModal = true;
@@ -13,19 +12,16 @@ angular.module('sweetSuiteApp')
     //  socket.syncUpdates('thing', $scope.awesomeThings);
     //});
 
-    $scope.addTodo = function(list) {
+    $scope.addTodo = function(list, newTodo) {
       // Check for duplicates
-      if ($scope.containsDuplicates(list, $scope.newTodo)) {
+      if ($scope.containsDuplicates(list, newTodo)) {
         return;
       }
-      if($scope.newTodo === undefined || $scope.newTodo === '') {
+      if(newTodo === undefined || newTodo === '') {
         return;
       }
 
-      //$http.post('api/things', { name: $scope.newThing } );
-      list.add({ name: $scope.newTodo, info: '' });
-      $scope.client.save();
-      $scope.newTodo = '';
+      list.todos.push({ name: newTodo, info: '' });
     };
 
     $scope.displayThingInfo = function(thing, size) {
@@ -34,7 +30,7 @@ angular.module('sweetSuiteApp')
         // Callback function to grab the text from the modal and store it into the appropriate thing.
         Modal.edit.todo(function(todoDesc, todoName) {
           thing.info = todoDesc;
-          $http.put('/api/things/' + thing._id, { info: todoDesc, name: todoName });
+          //$http.put('/api/things/' + thing._id, { info: todoDesc, name: todoName });
         }, thing, size).apply();
       }
 
@@ -59,7 +55,7 @@ angular.module('sweetSuiteApp')
       // If the user clicked the delete 'x,' then don't show the modal.
       $scope.showModal = false;
 
-      $http.delete('/api/things/' + thing._id);
+      //$http.delete('/api/things/' + thing._id);
     };
 
     $scope.$on('$destroy', function () {
@@ -67,7 +63,7 @@ angular.module('sweetSuiteApp')
     });
 
     $scope.containsDuplicates = function(list, name) {
-      var names = _.pluck(list, 'name')
+      var names = _.pluck(list.todos, 'name')
         , ii;
 
       for (ii = 0; ii < names.length; ++ii) {
@@ -77,5 +73,19 @@ angular.module('sweetSuiteApp')
       }
 
       return false;
+    };
+
+    $scope.focusList = function(title) {
+      var aref = 'todoList' + title;
+      if ($location.hash() !== aref) {
+        $location.hash(aref);
+      } else {
+        $anchorScroll();
+      }
+    };
+
+    $scope.saveChanges = function() {
+      //$scope.hideExampleLists();
+      Auth.updateUserLists($scope.client.lists);
     }
   });

@@ -105,6 +105,18 @@ angular.module('sweetSuiteApp')
           }).$promise;
       },
 
+      updateUserLists: function(lists, callback) {
+        var cb = callback || angular.noop;
+
+        return User.updateUserLists({id: currentUser._id}, {
+          newLists: lists
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
       /**
        * Gets all available info on authenticated user
        *
