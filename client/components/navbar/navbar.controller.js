@@ -11,6 +11,7 @@ angular.module('sweetSuiteApp')
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
+    $scope.isMaid= Auth.isMaid;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
