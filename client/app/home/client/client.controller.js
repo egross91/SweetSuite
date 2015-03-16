@@ -65,9 +65,14 @@ angular.module('sweetSuiteApp')
       });
     };
 
-    $scope.deleteThing = function(thing) {
+    $scope.deleteTodo = function(list, todo) {
       // If the user clicked the delete 'x,' then don't show the modal.
       $scope.showModal = false;
+      angular.forEach(list.todos, function(t, i) {
+        if (todo.$$hashKey === t.$$hashKey) {
+          list.todos.splice(i, 1);
+        }
+      });
 
       //$http.delete('/api/things/' + thing._id);
     };
