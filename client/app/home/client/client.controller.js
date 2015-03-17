@@ -7,11 +7,6 @@ angular.module('sweetSuiteApp')
     $scope.showTodoExample = false;
     $scope.showModal = true;
 
-    //$http.get('/api/things').success(function (awesomeThings) {
-    //  $scope.awesomeThings = awesomeThings;
-    //  socket.syncUpdates('thing', $scope.awesomeThings);
-    //});
-
     $scope.addTodo = function(list, newTodo) {
       // Check for duplicates
       if ($scope.containsDuplicates(list, newTodo)) {
@@ -36,7 +31,6 @@ angular.module('sweetSuiteApp')
         // Callback function to grab the text from the modal and store it into the appropriate thing.
         Modal.edit.todo(function(todoDesc, todoName) {
           thing.info = todoDesc;
-          //$http.put('/api/things/' + thing._id, { info: todoDesc, name: todoName });
         }, thing, size).apply();
       }
 
@@ -73,8 +67,6 @@ angular.module('sweetSuiteApp')
           list.todos.splice(i, 1);
         }
       });
-
-      //$http.delete('/api/things/' + thing._id);
     };
 
     $scope.$on('$destroy', function () {
@@ -104,7 +96,6 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.saveChanges = function() {
-      //$scope.hideExampleLists();
       Auth.updateUserLists($scope.client.lists);
     }
   });
