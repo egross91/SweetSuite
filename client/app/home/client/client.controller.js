@@ -69,10 +69,6 @@ angular.module('sweetSuiteApp')
       });
     };
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
-
     $scope.containsDuplicates = function(list, name) {
       var names = _.pluck(list.todos, 'name')
         , ii;
