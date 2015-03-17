@@ -17,7 +17,7 @@ angular.module('sweetSuiteApp')
           Auth.isLoggedInAsync(function(isLoggedIn) {
             if (isLoggedIn) {
               if (Auth.isAdmin()) {
-                $location.url('/admin');
+                $location.url('/admin/users');
               }
               else if(Auth.isMaid()){
                 $location.url('/maid');
