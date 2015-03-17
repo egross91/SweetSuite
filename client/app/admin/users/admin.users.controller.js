@@ -37,7 +37,7 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.isMaid = function(user){
-      return user.role=== 'maid';
+      return user.role === 'maid';
     };
 
     $scope.isCurrentUser = function(user) {

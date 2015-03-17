@@ -14,8 +14,8 @@
     <li class="list-group-item" ng-repeat="user in users">
         <strong>{{user.name}}</strong><br>
         <span class="text-muted">{{user.email}}</span>
-        <a ng-show="!isAdmin(user)" ng-click="makeAdmin(user)" class="plus" title="make admin"><span class="glyphicon glyphicon-plus pull-right"></span></a>
-        <a ng-show="!isAdmin(user)" ng-click="makeMaid(user)" class="plus" title="make maid"><span class="glyphicon glyphicon-plus pull-right"></span></a>
+        <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeAdmin(user)" class="plus" title="make admin"><span class="glyphicon glyphicon-globe pull-right"></span></a>
+        <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeMaid(user)" class="plus" title="make maid"><span class="glyphicon glyphicon-bell pull-right"></span></a>
 
         <a ng-show="isAdmin(user) && !isCurrentUser(user)" ng-click="demoteAdmin(user)" class="minus" title="demote admin to user"><span class="glyphicon glyphicon-minus-sign pull-right"></span></a>
         <a ng-show="isMaid(user) && !isCurrentUser(user)" ng-click="demoteMaid(user)" class="minus" title="demote maid to user"><span class="glyphicon glyphicon-minus-sign pull-right"></span></a>
