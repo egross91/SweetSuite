@@ -9,10 +9,10 @@
       <ul class="list-group">
         <accordion class="row" ng-repeat="todoList in client.lists">
           <div class="col-lg-12">
-            <accordion-group id="todoList{{todoList.title}}" ng-click="focusList(todoList.title)" heading="{{todoList.title}}">
+            <accordion-group id="todoList{{client.name}}{{todoList.title}}" ng-click="focusList(client.name, todoList.title)" heading="{{todoList.title}}">
               <accordion-heading>
                 {{todoList.title}}
-                <a ng-click="deleteList(todoList)" class="trash glyphicon glyphicon-trash pull-right" title="delete list"></a>
+                <a ng-click="deleteList(client, todoList)" class="trash glyphicon glyphicon-trash pull-right" title="delete list"></a>
               </accordion-heading>
               <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos">
                 <li><a href="#" ng-click="displayThingInfo(todo)">{{todo.name}}<button type="button" class="close" ng-click="deleteTodo(todoList, todo)">&times;</button></a></li>
