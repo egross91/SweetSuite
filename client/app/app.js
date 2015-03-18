@@ -49,7 +49,9 @@ angular.module('sweetSuiteApp', [
           $location.path('/login');
         } else if ((next.url === '/admin/users' || next.url === '/admin/todos') && !Auth.isAdmin()) {
           $location.path('/');
-        } else if (next.url === '/client' && Auth.isAdmin()) {
+        } else if (next.url === '/client' && (Auth.isAdmin() || Auth.isMaid())) {
+          $location.path('/');
+        } else if (next.url === '/maid' && !Auth.isMaid()) {
           $location.path('/');
         }
       });
