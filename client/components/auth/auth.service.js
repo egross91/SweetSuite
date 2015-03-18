@@ -105,10 +105,11 @@ angular.module('sweetSuiteApp')
           }).$promise;
       },
 
-      updateUserLists: function(lists, callback) {
+      updateUserLists: function(user, lists, callback) {
         var cb = callback || angular.noop;
 
-        return User.updateUserLists({id: currentUser._id}, {
+        return User.updateUserLists({id: user._id}, {
+          id: user._id,
           newLists: lists
         }, function(user) {
           return cb(user);

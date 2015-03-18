@@ -103,7 +103,7 @@ exports.changeRole = function(req, res, next) {
  * Update current user's to-do lists.
  */
 exports.updateUserLists = function(req, res, next) {
-  var userId = String(req.user._id);
+  var userId = String(req.body.id);
   var newLists = req.body.newLists;
 
   User.findById(userId, function(err, user) {

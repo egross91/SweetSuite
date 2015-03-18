@@ -92,6 +92,6 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.saveChanges = function() {
-      Auth.updateUserLists($scope.client.lists);
+      Auth.updateUserLists(Auth.getCurrentUser(), $scope.client.lists);
     }
   });

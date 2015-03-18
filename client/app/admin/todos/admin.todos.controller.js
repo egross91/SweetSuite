@@ -36,8 +36,15 @@ angular.module('sweetSuiteApp')
      * PUBLIC API
      */
     $scope.deleteList = function(client, list) {
-      angular.forEach(list.todos, function(l, i) {
-        // TODO
+      angular.forEach($scope.clients, function(c, i1) {
+        if (client === c) {
+          angular.forEach($scope.clients[i1].lists, function(l, i2) {
+            if (list.$$hashKey === l.$$hashKey) {
+              $scope.clients[i1].lists.splice(i2, 1);
+              Auth.updateUserLists(client, $scope.clients[i1].lists);
+            }
+          });
+        }
       });
     };
 
