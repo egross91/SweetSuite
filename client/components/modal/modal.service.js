@@ -108,7 +108,7 @@ angular.module('sweetSuiteApp')
             viewModal.result.then(function(event) {
               var result = document.getElementById('modalTextP');
 
-              result = (!result || result.innerText === '') ? 'Default' : result.innerText;
+              result = (!result || result.innerText.trim() === '') ? 'Default' : result.innerText;
 
               callback.apply(event, [result.trim()]);
             });

@@ -7,22 +7,43 @@ angular.module('sweetSuiteApp')
     $scope.showTodoExample = false;
     $scope.showModal = true;
 
+    var containsDuplicates = function(list, name, prop) {
+      var names = _.pluck(list, prop)
+        , ii;
+
+      for (ii = 0; ii < names.length; ++ii) {
+        if (name === names[ii]) {
+          return true;
+        }
+      }
+
+      return false;
+    };
+
     $scope.addTodo = function(list, newTodo) {
       // Check for duplicates
-      if ($scope.containsDuplicates(list, newTodo)) {
+      if (containsDuplicates(list.todos, newTodo, 'name')) {
+        alert('No Duplicates');
         return;
       }
       if(newTodo === undefined || newTodo === '') {
+        alert("You didn't enter anything");
         return;
       }
 
       list.todos.push({ name: newTodo, info: '' });
     };
 
-    $scope.createNewTodoList = function(size) {
-      Modal.edit.create(function(name) {
-        $scope.client.lists.push({ title: name, todos: [] });
-      }, size).apply();
+    $scope.createNewTodoList = function() {
+      Modal.edit.create(function(listName) {
+        var verifyName = listName.replace(/\n54+/g,'').trim();
+        if (verifyName === '' || containsDuplicates($scope.client.lists, verifyName, 'title')) {
+          alert('No Duplicates!');
+          return;
+        }
+
+        $scope.client.lists.push({ title: verifyName, todos: [] });
+      }).apply();
     };
 
     $scope.displayThingInfo = function(thing, size) {
@@ -67,19 +88,6 @@ angular.module('sweetSuiteApp')
           list.todos.splice(i, 1);
         }
       });
-    };
-
-    $scope.containsDuplicates = function(list, name) {
-      var names = _.pluck(list.todos, 'name')
-        , ii;
-
-      for (ii = 0; ii < names.length; ++ii) {
-        if (name === names[ii]) {
-          return true;
-        }
-      }
-
-      return false;
     };
 
     $scope.focusList = function(title) {
