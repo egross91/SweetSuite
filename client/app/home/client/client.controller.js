@@ -10,13 +10,11 @@ angular.module('sweetSuiteApp')
     var containsDuplicates = function(list, name, prop) {
       var names = _.pluck(list, prop)
         , ii;
-
       for (ii = 0; ii < names.length; ++ii) {
         if (name === names[ii]) {
           return true;
         }
       }
-
       return false;
     };
 
@@ -30,7 +28,6 @@ angular.module('sweetSuiteApp')
         alert("You didn't enter anything");
         return;
       }
-
       list.todos.push({ name: newTodo, info: '' });
     };
 
@@ -41,7 +38,6 @@ angular.module('sweetSuiteApp')
           alert('No Duplicates!');
           return;
         }
-
         $scope.client.lists.push({ title: verifyName, todos: [] });
       }).apply();
     };
