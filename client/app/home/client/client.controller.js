@@ -1,40 +1,30 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _, User, $location, $anchorScroll, Auth) {
+  .controller('ClientCtrl', function ($scope, socket, $http, Modal, _, User, $location, $anchorScroll, Auth, ListValidation) {
     $scope.client = User.get();
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
     $scope.showModal = true;
 
-    var containsDuplicates = function(list, name, prop) {
-      var names = _.pluck(list, prop)
-        , ii;
-      for (ii = 0; ii < names.length; ++ii) {
-        if (name === names[ii]) {
-          return true;
-        }
-      }
-      return false;
-    };
-
     $scope.addTodo = function(list, newTodo) {
       // Check for duplicates
-      if (containsDuplicates(list.todos, newTodo, 'name')) {
+      if (ListValidation.containsDuplicates(list.todos, newTodo, 'name')) {
         alert('No Duplicates');
         return;
       }
-      if(newTodo === undefined || newTodo === '') {
+      if(ListValidation.isFalsy(newTodo)) {
         alert("You didn't enter anything");
         return;
       }
+
       list.todos.push({ name: newTodo, info: '' });
     };
 
     $scope.createNewTodoList = function() {
       Modal.edit.create(function(listName) {
         var verifyName = listName.replace(/\n54+/g,'').trim();
-        if (verifyName === '' || containsDuplicates($scope.client.lists, verifyName, 'title')) {
+        if (ListValidation.isFalsy(verifyName) || ListValidation.containsDuplicates($scope.client.lists, verifyName, 'title')) {
           alert('No Duplicates!');
           return;
         }

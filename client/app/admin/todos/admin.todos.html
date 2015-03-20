@@ -15,7 +15,7 @@
                 <a ng-click="deleteList(client, todoList)" class="trash glyphicon glyphicon-trash pull-right" title="delete list"></a>
               </accordion-heading>
               <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos">
-                <li><a href="#" ng-click="displayThingInfo(todo)">{{todo.name}}<button type="button" class="close" ng-click="deleteTodo(todoList, todo)">&times;</button></a></li>
+                <li><a href="#" ng-click="displayThingInfo(todoList, todo)">{{todo.name}}<button type="button" class="close" ng-click="deleteTodo(client, todoList, todo.name)">&times;</button></a></li>
               </ul>
               <p class="container-fluid">
               <form class="thing-form">

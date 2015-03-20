@@ -48,6 +48,23 @@ angular.module('sweetSuiteApp')
       });
     };
 
+    $scope.deleteTodo = function(client, list, name) {
+      angular.forEach($scope.clients, function(c, i1) {
+        if (client === c) {
+          angular.forEach($scope.clients[i1].lists, function(l, i2) {
+            if (list.$$hashKey === l.$$hashKey) {
+              angular.forEach($scope.clients[i1].lists[i2].todos, function(t, i3) {
+                if (t.name === name) {
+                  $scope.clients[i1].lists[i2].todos.splice(i3, 1);
+                  Auth.updateUserLists(client, $scope.clients[i1].lists)
+                }
+              });
+            }
+          });
+        }
+      });
+    };
+
     $scope.focusUser = function(name) {
       var aref = 'user' + name;
       anchor(aref);
