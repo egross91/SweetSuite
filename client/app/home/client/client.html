@@ -23,37 +23,7 @@
     </div>
 
     <div id="todoContainer" class="container" ng-show="showTodoExample">
-      <accordion class="row" ng-repeat="todoList in client.lists">
-        <div class="col-lg-12">
-          <accordion-group id="todoList{{todoList.title}}" ng-click="focusList(todoList.title)" heading="{{todoList.title}}">
-            <accordion-heading>
-              {{todoList.title}}
-              <a ng-click="deleteList(todoList)" class="trash glyphicon glyphicon-trash pull-right" title="delete list"></a>
-            </accordion-heading>
-            <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos">
-              <li><a href="#" ng-click="displayThingInfo(todo)">{{todo.name}}<button type="button" class="close" ng-click="deleteTodo(todoList, todo)">&times;</button></a></li>
-            </ul>
-            <p class="container-fluid">
-              <form class="thing-form">
-                <label>New Todo</label>
-            <select class="input-large input-large-altered"  ng-model="priority">
-              <option value="" selected disabled>Select Priority</option>
-              <option priority="3">High Priority</option>
-              <option priority="2">Medium Priority</option>
-              <option priority="1">Low Priority</option>
-            </select>
-                <p class="input-group">
-                  <input type="text" class="form-control" placeholder="Add a new to-do here." ng-model="newTodo">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary" ng-click="addTodo(todoList, newTodo, priority)">Add New</button>
-                  </span>
-                </p>
-              </form>
-            </p>
-          </accordion-group>
-        </div>
-      </div>
-    </accordion>
+      <div ng-include="'../components/lists/lists.html'"></div>
     </div>
   </div>
 
