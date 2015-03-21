@@ -2,12 +2,19 @@
 
 angular.module('sweetSuiteApp')
   .controller('ClientCtrl', function ($scope, socket, $http, Modal, _, User, $location, $anchorScroll, Auth, ListValidation) {
-    $scope.client = User.get();
+
+    // error handling for non-existing list
+    var initUser = function(user) {
+      user.todos = user.todos || [];
+      return user;
+    };
+
+    $scope.client = initUser(User.get());
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
     $scope.showModal = true;
 
-    $scope.addTodo = function(list, newTodo) {
+    $scope.addTodo = function(list, newTodo, priority) {
       // Check for duplicates
       if (ListValidation.containsDuplicates(list.todos, newTodo, 'name')) {
         alert('No Duplicates');
@@ -17,8 +24,7 @@ angular.module('sweetSuiteApp')
         alert("You didn't enter anything");
         return;
       }
-
-      list.todos.push({ name: newTodo, info: '' });
+      list.todos.push({ name: newTodo, info: '', priority: priority });
     };
 
     $scope.createNewTodoList = function() {

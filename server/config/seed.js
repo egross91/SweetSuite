@@ -38,12 +38,12 @@ User.find({}).remove(function() {
     password: 'test',
     lists: [
             {title: 'House',
-             todos: [{name: 'the lawn', info: 'it\'s pretty bad out there'},
-                     {name: 'le trash', info: 'No one has touched it in a while. I need the workzzz.'},
-                     {name: 'Le Kitchen', info: 'We had a party last night, and that should be self explanatory...'}]
+             todos: [{name: 'The Lawn', info: 'There\'s garbage all over the lawn that needs to be picked up.', priority: 3},
+                     {name: 'The Trash', info: 'Please place the recyclables in the green can outside. Place the rest of the garbage in the black can.', priority: 3},
+                     {name: 'The Kitchen', info: 'All food left out needs to be disposed off. There are a few dishes that need to be washed.', priority: 1}]
             },
             {title: 'Guest House',
-             todos: [{name: 'All the trash cans', info : 'With a rager comes a lot of trash, ya know?'}]
+             todos: [{name: 'Bedrooms', info : 'All beds need to be made. Carpets in all bedrooms must be vacuumed', priority: 2}]
     }]
   }, {
     provider: 'local',

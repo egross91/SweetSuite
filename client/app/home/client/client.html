@@ -36,10 +36,16 @@
             <p class="container-fluid">
               <form class="thing-form">
                 <label>New Todo</label>
+            <select class="input-large input-large-altered"  ng-model="priority">
+              <option value="" selected disabled>Select Priority</option>
+              <option priority="3">High Priority</option>
+              <option priority="2">Medium Priority</option>
+              <option priority="1">Low Priority</option>
+            </select>
                 <p class="input-group">
                   <input type="text" class="form-control" placeholder="Add a new to-do here." ng-model="newTodo">
                   <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary" ng-click="addTodo(todoList, newTodo)">Add New</button>
+                    <button type="submit" class="btn btn-primary" ng-click="addTodo(todoList, newTodo, priority)">Add New</button>
                   </span>
                 </p>
               </form>
