@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ListsCtrl', function($scope, $location, $anchorScroll, Modal, _, Auth, ListValidation) {
+  .controller('ListsCtrl', function($scope, Modal, _, Auth, ListValidation) {
     $scope.clients = [];
 
     $scope.$on('setClients', function(events, arg) {
@@ -11,13 +11,13 @@ angular.module('sweetSuiteApp')
     /**
      * PRIVATE API
      */
-    var anchor = function(aref) {
-      if ($location.hash() !== aref) {
-        $location.hash(aref);
-      } else {
-        $anchorScroll();
-      }
-    };
+    //var anchor = function(aref) {
+    //  if ($location.hash() !== aref) {
+    //    $location.hash(aref);
+    //  } else {
+    //    $anchorScroll();
+    //  }
+    //};
 
     /**
      * PUBLIC API
@@ -127,13 +127,13 @@ angular.module('sweetSuiteApp')
       $scope.showModal = false;
     };
 
-    $scope.focusUser = function(name) {
-      var aref = 'user' + name;
-      anchor(aref);
-    };
-
-    $scope.focusList = function(user, name) {
-      var aref = 'todoList' + user + name;
-      anchor(aref);
-    };
+    //$scope.focusUser = function(name) {
+    //  var aref = 'user' + name;
+    //  anchor(aref);
+    //};
+    //
+    //$scope.focusList = function(user, name) {
+    //  var aref = 'todoList' + user + name;
+    //  anchor(aref);
+    //};
   });
