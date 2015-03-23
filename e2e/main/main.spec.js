@@ -1,13 +1,28 @@
 'use strict';
 
 describe('Main View', function() {
-  var page, clientLoginSetup, logoutTearDown;
+  var page, clientLoginSetup, adminLoginSetup, logoutTearDown, signupSetup;
 
   clientLoginSetup = function() {
     page.loginEl.click();
     page.emailEl.sendKeys('test@test.com');
     page.passwordEl.sendKeys('test');
     page.loginBtnEl.click();
+  };
+
+  adminLoginSetup = function() {
+    page.loginEl.click();
+    page.emailEl.sendKeys('admin@admin.com');
+    page.passwordEl.sendKeys('admin');
+    page.loginBtnEl.click();
+  };
+
+  signupSetup = function() {
+    page.signupEl.click();
+    page.signupNameEl.sendKeys('Alain Dobra');
+    page.signupEmailEl.sendKeys('real@user.com');
+    page.signupPasswordEl.sendKeys('password');
+    page.signupBtnEl.click();
   };
 
   logoutTearDown = function() {
@@ -25,12 +40,62 @@ describe('Main View', function() {
     expect(page.imgEl.getAttribute('alt')).toBe('( ͡° ͜ʖ ͡°)');
   });
 
+  it('should successfully go to how it works', function() {
+    page.howitworksEl.click();
+  });
+  it('should successfully signup', function() {
+    signupSetup();
+
+    logoutTearDown();
+  });
+
+  it('should successfully log in to admin page', function() {
+    adminLoginSetup();
+
+    logoutTearDown();
+  });
+
+  it('should successfully log in to admin page', function() {
+    adminLoginSetup();
+
+    logoutTearDown();
+  });
+
   it('should login the user in and take them to the client page with the base elements showing', function() {
     clientLoginSetup();
 
-    expect(page.createTodoListBtn.getText()).toBe('Create A TO-DO List');
+    expect(page.createTodoListBtn.getText()).toBe('Create New List');
     expect(page.viewExampleListBtn.getText()).toBe('View Example List');
-    expect(page.removeListsBtn.getText()).toBe('Remove Lists');
+    expect(page.removeListsBtn.getText()).toBe('Hide All');
+
+    logoutTearDown();
+  });
+
+  it('should allow the user to view the example list', function() {
+    clientLoginSetup();
+
+    expect(page.thingListContainerEl).toBeTruthy();
+
+    /* click the example list */
+    page.viewExampleListBtn.click();
+    /* TODO: Check to see it it's actually there*/
+    page.viewExampleListBtn.click();
+
+    logoutTearDown();
+  });
+
+  it('should hide all lists when the "Hide All" button is clicked', function() {
+    clientLoginSetup();
+
+    expect(page.thingListContainerEl).toBeTruthy();
+
+    /* click view lists and view example lists */
+
+    page.viewClientTodoListsBtn.click();
+    page.viewExampleListBtn.click();
+    /* TODO: Check that lists are there */
+    page.removeListsBtn.click();
+    /* TODO: make sure lists are gone */
 
     logoutTearDown();
   });
@@ -55,4 +120,5 @@ describe('Main View', function() {
 
     logoutTearDown();
   });
+
 });

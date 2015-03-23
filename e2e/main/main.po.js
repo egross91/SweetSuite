@@ -12,13 +12,22 @@ var MainPage = function() {
 
   this.navbarEl = element(by.id('navbar-main'));
   this.loginEl = this.navbarEl.element(by.id('login'));
+  this.signupEl = this.navbarEl.element(by.id('signup'));
+  this.howitworksEl = this.navbarEl.element(by.id('howitworks'));
 
   this.loginFormEl = element(by.name('form'));
   this.emailEl = this.loginFormEl.element(by.name('email'));
   this.passwordEl = this.loginFormEl.element(by.name('password'));
   this.loginBtnEl = this.loginFormEl.element(by.id('loginBtn'));
 
+  this.signupFormEl = this.loginFormEl;
+  this.signupNameEl = this.signupFormEl.element(by.id('name'));
+  this.signupEmailEl = this.signupFormEl.element(by.id('email'));
+  this.signupPasswordEl = this.signupFormEl.element(by.id('password'));
+  this.signupBtnEl = this.signupFormEl.element(by.id('signupBtn'));
+
   this.clientBtnListEl = element(by.id('btnListsDiv'));
+  this.viewClientTodoListsBtn = this.clientBtnListEl.element(by.id('viewListsBtn'));  // not working properly
   this.createTodoListBtn = this.clientBtnListEl.element(by.id('createListBtn'));
   this.viewExampleListBtn = this.clientBtnListEl.element(by.id('viewExampleListBtn'));
   this.removeListsBtn = this.clientBtnListEl.element(by.id('removeListsBtn'));

@@ -14,15 +14,15 @@
         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
-        <li ng-show="!isLoggedIn()" ng-class="{active: isActive('/how')}"><a href="/how">How It Works</a></li>
-        <li ng-show="isLoggedIn() && !isMaid() && !isAdmin()" ng-class="{active: isActive('/client')}"><a href="/client">My Lists</a></li>
-        <li ng-show="isLoggedIn() && isMaid() && !isAdmin()" ng-class="{active: isActive('/maid')}"><a href='/maid'>View Lists</a></li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/users')}"><a href="/admin/users">Manage Users</a></li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/todos')}"><a href="/admin/todos">Manage Todos</a></li>
+        <li ng-show="!isLoggedIn()" ng-class="{active: isActive('/how')}"><a id="howItWorks"href="/how">How It Works</a></li>
+        <li ng-show="isLoggedIn() && !isMaid() && !isAdmin()" ng-class="{active: isActive('/client')}"><a id="myLists"href="/client">My Lists</a></li>
+        <li ng-show="isLoggedIn() && isMaid() && !isAdmin()" ng-class="{active: isActive('/maid')}"><a id="viewLists"href='/maid'>View Lists</a></li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/users')}"><a id="manageUsers"href="/admin/users">Manage Users</a></li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/todos')}"><a id="manageTodos"href="/admin/todos">Manage Todos</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a id="signup"href="/signup">Sign up</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a id="login" href="/login">Login</a></li>
         <li ng-show="isLoggedIn() && !isMaid() && !isAdmin()"><p class="navbar-text"> Hello {{ getCurrentUser().name }}  </p> </li>
         <li ng-show="isMaid()"><p class="navbar-text"><span class="glyphicon glyphicon-star-empty" style="padding: 2px;"></span> Hello {{ getCurrentUser().name }}  </p> </li>
