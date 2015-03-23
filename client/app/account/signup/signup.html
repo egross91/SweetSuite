@@ -6,13 +6,13 @@
       <h1>Sign up</h1>
     </div>
     <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="register(form)" novalidate>
+      <form class="form" name="signupform" ng-submit="register(signupform)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
           <label>Name</label>
 
-          <input type="text" name="name" class="form-control" ng-model="user.name"
+          <input type="text" id="name" class="form-control" ng-model="user.name"
                  required/>
           <p class="help-block" ng-show="form.name.$error.required && submitted">
             A name is required
@@ -23,7 +23,7 @@
                                             'has-error': form.email.$invalid && submitted }">
           <label>Email</label>
 
-          <input type="email" name="email" class="form-control" ng-model="user.email"
+          <input type="email" id="email" class="form-control" ng-model="user.email"
                  required
                  mongoose-error/>
           <p class="help-block" ng-show="form.email.$error.email && submitted">
@@ -41,7 +41,7 @@
                                             'has-error': form.password.$invalid && submitted }">
           <label>Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.password"
+          <input type="password" id="password" class="form-control" ng-model="user.password"
                  ng-minlength="3"
                  required
                  mongoose-error/>

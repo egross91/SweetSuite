@@ -13,16 +13,19 @@ var MainPage = function() {
   this.navbarEl = element(by.id('navbar-main'));
   this.loginEl = this.navbarEl.element(by.id('login'));
   this.signupEl = this.navbarEl.element(by.id('signup'));
-  this.howitworksEl = this.navbarEl.element(by.id('howitworks'));
+  this.howitworksEl = this.navbarEl.element(by.id('howItWorks'));
+  this.myListsEl = this.navbarEl.element(by.id('myLists'));
+  this.goHomeEl = element(by.id('sweetsuite'));
   // admin specific
   this.adminManageTodos = this.navbarEl.element(by.id('manageTodos'));
+  this.adminManageUsers = this.navbarEl.element(by.id('manageUsers'));
 
   this.loginFormEl = element(by.name('form'));
   this.emailEl = this.loginFormEl.element(by.name('email'));
   this.passwordEl = this.loginFormEl.element(by.name('password'));
   this.loginBtnEl = this.loginFormEl.element(by.id('loginBtn'));
 
-  this.signupFormEl = this.loginFormEl;
+  this.signupFormEl = element(by.name('signupform'));
   this.signupNameEl = this.signupFormEl.element(by.id('name'));
   this.signupEmailEl = this.signupFormEl.element(by.id('email'));
   this.signupPasswordEl = this.signupFormEl.element(by.id('password'));

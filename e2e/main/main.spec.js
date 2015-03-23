@@ -43,15 +43,19 @@ describe('Main View', function() {
   it('should successfully go to how it works', function() {
     page.howitworksEl.click();
   });
+
   it('should successfully signup', function() {
     signupSetup();
-
+    page.myListsEl.click();
+    expect(page.myListsEl.getText()).toBe('My Lists');
+    page.goHomeEl.click();
     logoutTearDown();
   });
 
-  it('should successfully log in to admin page', function() {
+  it('should successfully log in to admin page and traverse navbar options', function() {
     adminLoginSetup();
-
+    page.adminManageTodos.click();
+    page.adminManageUsers.click();
     logoutTearDown();
   });
 
