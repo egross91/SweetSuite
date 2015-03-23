@@ -55,8 +55,10 @@ describe('Main View', function() {
     logoutTearDown();
   });
 
-  it('should successfully log in to admin page', function() {
+  it('should reflect admin list changes on the client', function() {
     adminLoginSetup();
+    page.adminManageTodos.click();
+
 
     logoutTearDown();
   });

@@ -14,6 +14,8 @@ var MainPage = function() {
   this.loginEl = this.navbarEl.element(by.id('login'));
   this.signupEl = this.navbarEl.element(by.id('signup'));
   this.howitworksEl = this.navbarEl.element(by.id('howitworks'));
+  // admin specific
+  this.adminManageTodos = this.navbarEl.element(by.id('manageTodos'));
 
   this.loginFormEl = element(by.name('form'));
   this.emailEl = this.loginFormEl.element(by.name('email'));
