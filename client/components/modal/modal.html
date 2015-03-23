@@ -9,7 +9,7 @@
     <textarea id="modalHtmlTextArea" class="form-control scrollable-content" ng-if="modal.textarea" ng-bind-html="modal.html" contenteditable="{{modal.editable}}" placeholder="Enter description here..."></textarea>
     <br/>
     <label>Priority: </label> <br/> <br/> <br/>
-    <select class="input-large input-large-altered"  ng-model="priority">
+    <select id="todoDisplayPriority" class="input-large input-large-altered"  ng-model="priority">
       <option value="" selected disabled>Select Priority</option>
       <option priority="3">High Priority</option>
       <option priority="2">Medium Priority</option>

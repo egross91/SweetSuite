@@ -40,6 +40,7 @@ angular.module('sweetSuiteApp')
                 editable: true,
                 description: 'Todo Description',
                 textarea: true,
+                priority: thing.priority,
                 buttons: [{
                   classes: 'btn-info',
                   text: 'OK',
@@ -57,20 +58,24 @@ angular.module('sweetSuiteApp')
             }, null);
 
             viewModal.result.then(function(event) {
-              var modified = document.getElementById('modalHtmlTextArea')
-                , result = null;
+              var modifiedDesc = document.getElementById('modalHtmlTextArea')
+                , resultDesc = null
+                , newPriority = document.getElementById('todoDisplayPriority')
+                , resultPriority = null;
 
-              if (modified) {
-                result = modified.value;
+              if (modifiedDesc) {
+                resultDesc = modifiedDesc.value;
               }
-              else if ((modified = document.getElementById('modalTextP'))) {
-                result = modified.innerText;
+              else if ((modifiedDesc = document.getElementById('modalTextP'))) {
+                resultDesc = modifiedDesc.innerText;
               }
               else {
-                result = '';
+                resultDesc = '';
               }
 
-              callback.apply(event, [result.trim(), thing.name]);
+              resultPriority = (!newPriority.options[newPriority.selectedIndex].priority) ? 1 : newPriority.options[newPriority.selectedIndex].priority;
+
+              callback.apply(event, [resultDesc.trim(), resultPriority]);
             });
           }
         },

@@ -22,39 +22,74 @@ angular.module('sweetSuiteApp')
     /**
      * PUBLIC API
      */
-    $scope.addTodo = function(clientIndex, listIndex, newTodo, priority) {
-      // Check for duplicates
-      if (ListValidation.containsDuplicates($scope.clients[clientIndex].lists[listIndex].todos, newTodo, 'name')) {
-        alert('No Duplicates');
-        return;
-      }
-      if(ListValidation.isFalsy(newTodo)) {
-        alert("You didn't enter anything");
-        return;
-      }
+    $scope.addTodo = function(client, todoList, newTodo, priority) {
+      angular.forEach($scope.clients, function(c, clientIndex) {
+        if (c === client) {
+          angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
+            if (l === todoList) {
+              // Check for duplicates
+              if (ListValidation.containsDuplicates($scope.clients[clientIndex].lists[listIndex].todos, newTodo, 'name')) {
+                alert('No Duplicates');
+                return;
+              }
+              if(ListValidation.isFalsy(newTodo)) {
+                alert("You didn't enter anything");
+                return;
+              }
 
-      $scope.clients[clientIndex].lists[listIndex].todos.push({ name: newTodo, info: '', priority: priority });
-      Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+              $scope.clients[clientIndex].lists[listIndex].todos.push({ name: newTodo, info: '', priority: priority });
+              Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+            }
+          });
+        }
+      });
     };
 
-    $scope.createNewTodoList = function() {
+    $scope.createNewTodoList = function(client) {
       Modal.edit.create(function(listName) {
-        var verifyName = listName.replace(/\n54+/g,'').trim();
-        if (ListValidation.isFalsy(verifyName) || ListValidation.containsDuplicates($scope.client.lists, verifyName, 'title')) {
-          alert('No Duplicates!');
-          return;
-        }
-        $scope.client.lists.push({ title: verifyName, todos: [] });
-        //Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+        angular.forEach($scope.clients, function(c, clientIndex) {
+          if (c === client) {
+            var verifyName = listName.replace(/\n54+/g,'').trim();
+            if (ListValidation.isFalsy(verifyName) || ListValidation.containsDuplicates($scope.client.lists, verifyName, 'title')) {
+              alert('No Duplicates!');
+              return;
+            }
+            $scope.clients[clientIndex].lists.push({ title: verifyName, todos: [] });
+            Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+          }
+        });
       }).apply();
     };
 
-    $scope.displayTodoInfo = function(clientIndex, listIndex, todoIndex, size) {
+    $scope.displayTodoInfo = function(client, todoList, todo, size) {
+      var clientIndex
+        , listIndex
+        , todoIndex;
+
+      angular.forEach($scope.clients, function(c, ci) {
+        if (c === client) {
+          clientIndex = ci;
+          angular.forEach($scope.clients[clientIndex].lists, function(l, li) {
+            if (l === todoList) {
+              listIndex = li;
+              angular.forEach($scope.clients[clientIndex].lists[listIndex].todos, function(t, ti) {
+                if (t === todo) {
+                  todoIndex = ti;
+                }
+              })
+            }
+          })
+        }
+      });
+
       // Show the modal if user didn't click the delete 'x'.
       if ($scope.showModal) {
         // Callback function to grab the text from the modal and store it into the appropriate thing.
-        Modal.edit.todo(function(todoDesc, todoName) {
+        Modal.edit.todo(function(todoDesc, todoPriority) {
           $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].info = todoDesc;
+          $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].priority = todoPriority;
+
+          Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
         }, $scope.clients[clientIndex].lists[listIndex].todos[todoIndex], size).apply();
       }
 
@@ -62,14 +97,34 @@ angular.module('sweetSuiteApp')
       $scope.showModal = true;
     };
 
-    $scope.deleteList = function(clientIndex, listIndex) {
-      $scope.clients[clientIndex].lists.splice(listIndex, 1);
-      Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+    $scope.deleteList = function(client, list) {
+      angular.forEach($scope.clients, function(c, clientIndex) {
+        if (c === client) {
+          angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
+            $scope.clients[clientIndex].lists.splice(listIndex, 1);
+            Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+          });
+        }
+      });
     };
 
-    $scope.deleteTodo = function(clientIndex, listIndex, todoIndex) {
-      $scope.clients[clientIndex].lists[listIndex].todos.splice(todoIndex, 1);
-      Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+    $scope.deleteTodo = function(client, todoList, todo) {
+      angular.forEach($scope.clients, function(c, clientIndex) {
+        if (c === client) {
+          angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
+            if (l === todoList) {
+              angular.forEach($scope.clients[clientIndex].lists[listIndex].todos, function(t, todoIndex) {
+                if (t === todo) {
+                  $scope.clients[clientIndex].lists[listIndex].todos.splice(todoIndex, 1);
+                  Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+                }
+              });
+            }
+          });
+        }
+      });
+
+      $scope.showModal = false;
     };
 
     $scope.focusUser = function(name) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sweetSuiteApp')
-  .controller('ClientCtrl', function ($scope, $rootScope, socket, $http, Modal, _, User, $location, $anchorScroll, Auth) {
+  .controller('ClientCtrl', function ($scope, $rootScope, socket, $http, Modal, _, User) {
     $scope.showTodoExampleImage = false;
     $scope.showTodoExample = false;
     $scope.showModal = true;

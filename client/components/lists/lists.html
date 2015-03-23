@@ -1,19 +1,19 @@
 <div class="container" ng-controller="ListsCtrl">
-  <accordion class="list-group-item" ng-repeat="client in clients" ng-init="clientIndex = $index">
+  <accordion class="list-group-item" ng-repeat="client in clients">
     <accordion-group id="user{{client.name}}" ng-click="focusUser(client.name)" heading="{{client.name}} | {{client.email}}">
       <accordion-heading>
         <strong>{{client.name}}</strong> | <span class="text-muted">{{client.email}}</span>
       </accordion-heading>
       <ul class="list-group">
-        <accordion class="row" ng-repeat="todoList in client.lists" ng-init="listIndex = $index">
+        <accordion class="row" ng-repeat="todoList in client.lists">
           <div class="col-lg-12">
             <accordion-group id="todoList{{client.name}}{{todoList.title}}" ng-click="focusList(client.name, todoList.title)" heading="{{todoList.title}}">
               <accordion-heading>
                 {{todoList.title}}
-                <a ng-click="deleteList(clientIndex, listIndex)" class="trash glyphicon glyphicon-trash pull-right" title="delete list"></a>
+                <a ng-click="deleteList(client, todoList)" class="trash glyphicon glyphicon-trash pull-right" title="delete list"></a>
               </accordion-heading>
-              <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos" ng-init="todoIndex = $index">
-                <li><a href="#" ng-click="displayTodoInfo(clientIndex, listIndex, todoIndex)">{{todo.name}}<button type="button" class="close" ng-click="deleteTodo(clientIndex, listIndex, todoIndex)">&times;</button></a></li>
+              <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="todo in todoList.todos">
+                <li><a href="#" ng-click="displayTodoInfo(client, todoList, todo)">{{todo.name}}<button type="button" class="close" ng-click="deleteTodo(client, todoList, todo)">&times;</button></a></li>
               </ul>
               <p class="container-fluid">
               <form class="thing-form">
@@ -27,7 +27,7 @@
                 <p class="input-group">
                   <input type="text" class="form-control" placeholder="Add a new to-do here." ng-model="newTodo">
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-primary" ng-click="addTodo(clientIndex, listIndex, newTodo, priority)">Add New</button>
+                      <button type="submit" class="btn btn-primary" ng-click="addTodo(client, todoList, newTodo, priority)">Add New</button>
                     </span>
                 </p>
               </form>
