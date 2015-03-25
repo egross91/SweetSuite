@@ -4,6 +4,7 @@ angular.module('sweetSuiteApp')
   .controller('ListsCtrl', function($scope, Modal, _, Auth, ListValidation) {
     $scope.clients = [];
     $scope.resetPriority = true;
+    $scope.accordionIsDisabled = false;
 
     $scope.$on('setClients', function(events, arg) {
       $scope.clients = arg;
@@ -30,15 +31,15 @@ angular.module('sweetSuiteApp')
             if (l === todoList) {
               // Check for duplicates
               if (ListValidation.containsDuplicates($scope.clients[clientIndex].lists[listIndex].todos, newTodo, 'name')) {
-                alert('No Duplicates');
+                alert('No Duplicates!');
                 return;
               }
               if(ListValidation.isFalsy(newTodo)) {
-                alert("You didn't enter anything");
+                alert("You didn't enter anything.");
                 return;
               }
               if (ListValidation.isFalsy(priority)) {
-                alert('Need to set a priority');
+                alert('Need to set a priority.');
                 return;
               }
 
@@ -53,14 +54,18 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.createNewTodoList = function(client) {
+      $scope.accordionIsDisabled = !$scope.accordionIsDisabled;
+
       Modal.edit.create(function(listName) {
+        $scope.accordionIsDisabled = false;
         angular.forEach($scope.clients, function(c, clientIndex) {
           if (c === client) {
             var verifyName = listName.replace(/\n54+/g,'').trim();
-            if (ListValidation.isFalsy(verifyName) || ListValidation.containsDuplicates($scope.client.lists, verifyName, 'title')) {
+            if (ListValidation.isFalsy(verifyName) || ListValidation.containsDuplicates($scope.clients[clientIndex].lists, verifyName, 'title')) {
               alert('No Duplicates!');
               return;
             }
+
             $scope.clients[clientIndex].lists.push({ title: verifyName, todos: [] });
             Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
           }
@@ -93,6 +98,10 @@ angular.module('sweetSuiteApp')
       if ($scope.showModal) {
         // Callback function to grab the text from the modal and store it into the appropriate thing.
         Modal.edit.todo(function(todoDesc, todoPriority) {
+          if (ListValidation.isFalsy(todoPriority)) {
+            alert('Need to set a priority.');
+            return;
+          }
           $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].info = todoDesc;
           $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].priority = todoPriority;
 

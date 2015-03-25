@@ -9,12 +9,12 @@
     <textarea id="modalHtmlTextArea" class="form-control scrollable-content" ng-if="modal.textarea" ng-bind-html="modal.html" contenteditable="{{modal.editable}}" placeholder="Enter description here..."></textarea>
     <br/>
     <div ng-show="modal.isTodo" id="prioritySelectGroup">
-      <label>Priority: </label> <br/>
-      <select id="todoDisplayPriority" class="input-large input-large-altered"  ng-model="priority">
-        <option value="" ng-selected="!modal.priority">Select Priority</option>
-        <option priority="3" ng-selected="(modal.priority == 3)">High Priority</option>
-        <option priority="2" ng-selected="(modal.priority == 2)">Medium Priority</option>
-        <option priority="1" ng-selected="(modal.priority == 1)">Low Priority</option>
+      <label>Old Priority: </label> {{modal.priority}} <br/>
+      <label>New Priority: </label> <br/>
+      <select id="todoDisplayPriority" class="input-large input-large-altered">
+        <option value="3">High Priority</option>
+        <option value="2">Medium Priority</option>
+        <option value="1">Low Priority</option>
       </select>
     </div>
   </div>

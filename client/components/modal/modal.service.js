@@ -22,6 +22,19 @@ angular.module('sweetSuiteApp')
       });
     }
 
+    function getPriorityString(priority) {
+      switch(priority) {
+        case "1":
+              return 'High Priority';
+        case "2":
+              return 'Medium Priority';
+        case "3":
+              return 'Low Priority';
+        default:
+              return 'Default';
+      }
+    }
+
     // Public API here
     return  {
 
@@ -41,7 +54,7 @@ angular.module('sweetSuiteApp')
                 description: 'Todo Description',
                 textarea: true,
                 isTodo: true,
-                priority: thing.priority,
+                priority: getPriorityString(thing.priority),
                 buttons: [{
                   classes: 'btn-info',
                   text: 'OK',
@@ -62,7 +75,7 @@ angular.module('sweetSuiteApp')
               var modifiedDesc = document.getElementById('modalHtmlTextArea')
                 , resultDesc = null
                 , newPriority = document.getElementById('todoDisplayPriority')
-                , resultPriority = null;
+                , resultPriority;
 
               if (modifiedDesc) {
                 resultDesc = modifiedDesc.value;
@@ -74,7 +87,7 @@ angular.module('sweetSuiteApp')
                 resultDesc = '';
               }
 
-              resultPriority = (!newPriority.options[newPriority.selectedIndex].priority) ? 1 : newPriority.options[newPriority.selectedIndex].priority;
+              resultPriority = (!newPriority.options[newPriority.selectedIndex].value) ? 1 : newPriority.options[newPriority.selectedIndex].value;
 
               callback.apply(event, [resultDesc.trim(), resultPriority]);
             });
@@ -115,7 +128,6 @@ angular.module('sweetSuiteApp')
               var result = document.getElementById('modalTextP');
 
               result = (!result || result.innerText.trim() === '') ? 'Default' : result.innerText;
-
               callback.apply(event, [result.trim()]);
             });
           }

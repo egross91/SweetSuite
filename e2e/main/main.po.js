@@ -35,12 +35,14 @@ var MainPage = function() {
 
   this.clientBtnListEl = element(by.id('btnListsDiv'));
   this.viewClientTodoListsBtn = this.clientBtnListEl.element(by.id('viewListsBtn'));  // not working properly
-  this.createTodoListBtn = this.clientBtnListEl.element(by.id('createListBtn'));
+  this.viewTodoListsBtn = this.clientBtnListEl.element(by.id('viewListsBtn'));
   this.viewExampleListBtn = this.clientBtnListEl.element(by.id('viewExampleListBtn'));
-  this.removeListsBtn = this.clientBtnListEl.element(by.id('removeListsBtn'));
+  this.hideListsBtn = this.clientBtnListEl.element(by.id('hideListsBtn'));
 
   this.thingListContainerEl = element(by.id('todoContainer'));
-  this.thingsEls = this.thingListContainerEl.all(by.css('ul'));
+  this.testUserUserAccordionEl = this.thingListContainerEl.element(by.id('user5512d88eab199968138c49b7')).element(by.css('accordion-toggle'));
+  this.userTestTodoListEl = this.testUserUserAccordionEl.element(by.id('todoListHouse')).element(by.css('accordion-toggle'));
+  this.userTestTodoListTodosEl = this.userTestTodoListEl.all(by.css('ul'));
 
   this.todoEditModalEl = element(by.id('todoEditModal'));
   this.todoDescriptionLbl = this.todoEditModalEl.element(by.css('label'));

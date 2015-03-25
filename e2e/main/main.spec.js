@@ -70,9 +70,9 @@ describe('Main View', function() {
   it('should login the user in and take them to the client page with the base elements showing', function() {
     clientLoginSetup();
 
-    expect(page.createTodoListBtn.getText()).toBe('Create New List');
+    expect(page.viewTodoListsBtn.getText()).toBe('View Lists');
     expect(page.viewExampleListBtn.getText()).toBe('View Example List');
-    expect(page.removeListsBtn.getText()).toBe('Hide All');
+    expect(page.hideListsBtn.getText()).toBe('Hide All');
 
     logoutTearDown();
   });
@@ -85,10 +85,6 @@ describe('Main View', function() {
     /* click the example list */
     page.viewExampleListBtn.click();
     expect(page.exampleListImg).toBeTruthy();
-
-    /* click the button again to hide the example list */
-    page.viewExampleListBtn.click();
-    expect(page.exampleListImg).toBeFalsy();
 
     logoutTearDown();
   });
@@ -103,7 +99,7 @@ describe('Main View', function() {
     page.viewClientTodoListsBtn.click();
     page.viewExampleListBtn.click();
     /* TODO: Check that lists are there */
-    page.removeListsBtn.click();
+    page.hideListsBtn.click();
     /* TODO: make sure lists are gone */
 
     logoutTearDown();
@@ -115,9 +111,11 @@ describe('Main View', function() {
     expect(page.thingListContainerEl).toBeTruthy();
 
     /* Make the todo list visible & has 3 elements. */
-    page.createTodoListBtn.click();
-    expect(page.thingsEls.count()).toBe(3);
-    page.thingsEls.get(0).click();
+    page.viewTodoListsBtn.click();
+    page.testUserUserAccordionEl.click();
+    page.userTestTodoListEl.click();
+    expect(page.userTestTodoListTodosEl.count()).toBe(3);
+    page.userTestTodoListTodosEl.get(0).click();
 
     /* Check the modal and its contents. */
     expect(page.todoEditModalEl).toBeTruthy();
