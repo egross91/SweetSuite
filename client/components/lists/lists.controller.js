@@ -3,6 +3,7 @@
 angular.module('sweetSuiteApp')
   .controller('ListsCtrl', function($scope, Modal, _, Auth, ListValidation) {
     $scope.clients = [];
+    $scope.resetPriority = true;
 
     $scope.$on('setClients', function(events, arg) {
       $scope.clients = arg;
@@ -36,9 +37,15 @@ angular.module('sweetSuiteApp')
                 alert("You didn't enter anything");
                 return;
               }
+              if (ListValidation.isFalsy(priority)) {
+                alert('Need to set a priority');
+                return;
+              }
 
               $scope.clients[clientIndex].lists[listIndex].todos.push({ name: newTodo, info: '', priority: priority });
               Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+
+              $scope.resetPriority = true;
             }
           });
         }
@@ -127,6 +134,10 @@ angular.module('sweetSuiteApp')
       });
 
       $scope.showModal = false;
+    };
+
+    $scope.priorityChanged = function() {
+      $scope.resetPriority = false;
     };
 
     //$scope.focusUser = function(name) {

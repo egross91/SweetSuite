@@ -31,6 +31,8 @@ var MainPage = function() {
   this.signupPasswordEl = this.signupFormEl.element(by.id('password'));
   this.signupBtnEl = this.signupFormEl.element(by.id('signupBtn'));
 
+  this.exampleListImg = element(by.id('exampleListImg'));
+
   this.clientBtnListEl = element(by.id('btnListsDiv'));
   this.viewClientTodoListsBtn = this.clientBtnListEl.element(by.id('viewListsBtn'));  // not working properly
   this.createTodoListBtn = this.clientBtnListEl.element(by.id('createListBtn'));

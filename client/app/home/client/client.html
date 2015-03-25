@@ -1,28 +1,25 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-  <div class="container">
-    <div class="page">
-      <div class="row" id="btnListsDiv">
-        <div class="btn btn-success" id="createListBtn" ng-click="createNewTodoList()">
-          Create New List
-        </div>
-        <div class="btn btn-primary" id="viewListsBtn" ng-click="toggleTodoExample()">
-          View Lists
-        </div>
-        <div class="btn btn-primary" id="viewExampleListBtn" ng-click="toggleTodoExampleImage()">
-          View Example List
-        </div>
-        <div class="btn btn-primary" id="removeListsBtn" ng-click="hideExampleLists()">
-          Hide All
-        </div>
-        <img class="center-block img-rounded" src="../assets/images/examplelist.png" ng-show="showTodoExampleImage" alt="Example List"/>
+<div class="container">
+  <div class="page">
+    <div class="row" id="btnListsDiv">
+      <div class="btn btn-primary" id="viewListsBtn" ng-click="toggleTodoExample()">
+        View Lists
       </div>
-    </div>
-
-    <div id="todoContainer" class="container" ng-show="showTodoExample">
-      <div ng-include="'../components/lists/lists.html'"></div>
+      <div class="btn btn-primary" id="viewExampleListBtn" ng-click="toggleTodoExampleImage()">
+        View Example List
+      </div>
+      <div class="btn btn-primary" id="removeListsBtn" ng-click="hideExampleLists()">
+        Hide All
+      </div>
+      <img id="exampleListImg" class="center-block img-rounded" src="../assets/images/examplelist.png" ng-show="showTodoExampleImage" alt="Example List"/>
     </div>
   </div>
+
+  <div id="todoContainer" class="container" ng-show="showTodoExample">
+    <div ng-include="'../components/lists/lists.html'"></div>
+  </div>
+</div>
 
 <div ng-include="'components/footer/footer.html'"></div>
 <div class="hidden" id="todoEditModal">

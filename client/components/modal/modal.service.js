@@ -40,6 +40,7 @@ angular.module('sweetSuiteApp')
                 editable: true,
                 description: 'Todo Description',
                 textarea: true,
+                isTodo: true,
                 priority: thing.priority,
                 buttons: [{
                   classes: 'btn-info',

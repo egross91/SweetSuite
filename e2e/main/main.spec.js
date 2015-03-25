@@ -84,8 +84,11 @@ describe('Main View', function() {
 
     /* click the example list */
     page.viewExampleListBtn.click();
-    /* TODO: Check to see it it's actually there*/
+    expect(page.exampleListImg).toBeTruthy();
+
+    /* click the button again to hide the example list */
     page.viewExampleListBtn.click();
+    expect(page.exampleListImg).toBeFalsy();
 
     logoutTearDown();
   });

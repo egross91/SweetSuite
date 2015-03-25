@@ -3,6 +3,7 @@
     <accordion-group id="user{{client.name}}" heading="{{client.name}} | {{client.email}}">
       <accordion-heading>
         <strong>{{client.name}}</strong> | <span class="text-muted">{{client.email}}</span>
+        <a ng-click="createNewTodoList(client)" class="edit glyphicon glyphicon-edit pull-right" title="add list"></a>
       </accordion-heading>
       <ul class="list-group">
         <accordion class="row" ng-repeat="todoList in client.lists">
@@ -17,12 +18,12 @@
               </ul>
               <p class="container-fluid">
               <form class="thing-form">
-                <label>New Todo</label>
-                <select class="input-large input-large-altered"  ng-model="priority">
-                  <option value="" selected disabled>Select Priority</option>
-                  <option priority="3">High Priority</option>
-                  <option priority="2">Medium Priority</option>
-                  <option priority="1">Low Priority</option>
+                <label for="prioritySelect">New Todo</label>
+                <select id="prioritySelect" class="input-large input-large-altered" ng-model="priority" ng-change="priorityChanged()">
+                  <option value="" ng-selected="resetPriority">Select Priority</option>
+                  <option value="3">High Priority</option>
+                  <option value="2">Medium Priority</option>
+                  <option value="1">Low Priority</option>
                 </select>
                 <p class="input-group">
                   <input type="text" class="form-control" placeholder="Add a new to-do here." ng-model="newTodo">
