@@ -101,8 +101,10 @@ angular.module('sweetSuiteApp')
       angular.forEach($scope.clients, function(c, clientIndex) {
         if (c === client) {
           angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
-            $scope.clients[clientIndex].lists.splice(listIndex, 1);
-            Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+            if (list === l) {
+              $scope.clients[clientIndex].lists.splice(listIndex, 1);
+              Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+            }
           });
         }
       });
