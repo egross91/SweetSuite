@@ -90,7 +90,7 @@ describe('Controller: ListsCtrl', function() {
     $httpBackend.flush();
     setClients(getUsersByRole('user'));
 
-    scope.addTodo(scope.clients[0], scope.clients[0].lists[0], 'Testing', 1);
+    scope.addTodo(scope.clients[0], scope.clients[0].lists[0], 'Testing', "1");
     expect(scope.clients[0].lists[0].todos[3].name).toBe('Testing');
   });
 

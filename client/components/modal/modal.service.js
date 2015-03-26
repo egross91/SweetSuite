@@ -94,7 +94,7 @@ angular.module('sweetSuiteApp')
           }
         },
 
-        create: function(cb, size) {
+        create: function(cb, scope, size) {
           return function() {
             var viewModal
               , callback = cb || angular.noop;
@@ -112,12 +112,14 @@ angular.module('sweetSuiteApp')
                   classes: 'btn-info',
                   text: 'Done',
                   click: function(e) {
+                    scope.accordionIsDisabled = false;
                     viewModal.close(e);
                   }
                 }, {
                   classes: 'btn-default',
                   text: 'Cancel',
                   click: function(e) {
+                    scope.accordionIsDisabled = false;
                     viewModal.dismiss(e);
                   }
                 }]

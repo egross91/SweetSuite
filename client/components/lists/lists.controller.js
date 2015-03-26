@@ -54,10 +54,9 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.createNewTodoList = function(client) {
-      $scope.accordionIsDisabled = !$scope.accordionIsDisabled;
+      $scope.accordionIsDisabled = true;
 
       Modal.edit.create(function(listName) {
-        $scope.accordionIsDisabled = false;
         angular.forEach($scope.clients, function(c, clientIndex) {
           if (c === client) {
             var verifyName = listName.replace(/\n54+/g,'').trim();
@@ -70,7 +69,7 @@ angular.module('sweetSuiteApp')
             Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
           }
         });
-      }).apply();
+      },  $scope).apply();
     };
 
     $scope.displayTodoInfo = function(client, todoList, todo, size) {
