@@ -26,9 +26,9 @@ angular.module('sweetSuiteApp')
      */
     $scope.addTodo = function(client, todoList, newTodo, priority) {
       angular.forEach($scope.clients, function(c, clientIndex) {
-        if (c === client) {
+        if (c._id === client._id) {
           angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
-            if (l === todoList) {
+            if (l.$$hashKey === todoList.$$hashKey) {
               // Check for duplicates
               if (ListValidation.containsDuplicates($scope.clients[clientIndex].lists[listIndex].todos, newTodo, 'name')) {
                 alert('No Duplicates!');
@@ -58,7 +58,7 @@ angular.module('sweetSuiteApp')
 
       Modal.edit.create(function(listName) {
         angular.forEach($scope.clients, function(c, clientIndex) {
-          if (c === client) {
+          if (c._id === client._id) {
             var verifyName = listName.replace(/\n54+/g,'').trim();
             if (ListValidation.isFalsy(verifyName) || ListValidation.containsDuplicates($scope.clients[clientIndex].lists, verifyName, 'title')) {
               alert('No Duplicates!');
@@ -78,13 +78,13 @@ angular.module('sweetSuiteApp')
         , todoIndex;
 
       angular.forEach($scope.clients, function(c, ci) {
-        if (c === client) {
+        if (c._id === client._id) {
           clientIndex = ci;
           angular.forEach($scope.clients[clientIndex].lists, function(l, li) {
-            if (l === todoList) {
+            if (l.$$hashKey === todoList.$$hashKey) {
               listIndex = li;
               angular.forEach($scope.clients[clientIndex].lists[listIndex].todos, function(t, ti) {
-                if (t === todo) {
+                if (t.$$hashKey === todo.$$hashKey) {
                   todoIndex = ti;
                 }
               })
@@ -114,9 +114,9 @@ angular.module('sweetSuiteApp')
 
     $scope.deleteList = function(client, list) {
       angular.forEach($scope.clients, function(c, clientIndex) {
-        if (c === client) {
+        if (c._id === client._id) {
           angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
-            if (list === l) {
+            if (list.$$hashKey === l.$$hashKey) {
               $scope.clients[clientIndex].lists.splice(listIndex, 1);
               Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
             }
@@ -127,11 +127,11 @@ angular.module('sweetSuiteApp')
 
     $scope.deleteTodo = function(client, todoList, todo) {
       angular.forEach($scope.clients, function(c, clientIndex) {
-        if (c === client) {
+        if (c._id === client._id) {
           angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
-            if (l === todoList) {
+            if (l.$$hashKey === todoList.$$hashKey) {
               angular.forEach($scope.clients[clientIndex].lists[listIndex].todos, function(t, todoIndex) {
-                if (t === todo) {
+                if (t.$$hashKey === todo.$$hashKey) {
                   $scope.clients[clientIndex].lists[listIndex].todos.splice(todoIndex, 1);
                   Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
                 }

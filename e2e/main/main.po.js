@@ -39,16 +39,25 @@ var MainPage = function() {
   this.viewExampleListBtn = this.clientBtnListEl.element(by.id('viewExampleListBtn'));
   this.hideListsBtn = this.clientBtnListEl.element(by.id('hideListsBtn'));
 
-  this.thingListContainerEl = element(by.id('todoContainer'));
-  this.testUserUserAccordionEl = this.thingListContainerEl.element(by.id('user5512d88eab199968138c49b7')).element(by.css('accordion-toggle'));
-  this.userTestTodoListEl = this.testUserUserAccordionEl.element(by.id('todoListHouse')).element(by.css('accordion-toggle'));
-  this.userTestTodoListTodosEl = this.userTestTodoListEl.all(by.css('ul'));
+  this.todoListContainerEl = element(by.css('[id=todoContainer]')).all(by.repeater('client in clients'));
+  this.userTodoListEl = function(ind) {
+    return this.todoListContainerEl.get(ind);
+  };
+
+  //this.todoListItemEl = function(userInd, itemTodo) {
+  //  return this.userTodoListEl(userInd);
+  //};
 
   this.todoEditModalEl = element(by.id('todoEditModal'));
   this.todoDescriptionLbl = this.todoEditModalEl.element(by.css('label'));
 
   this.todoEditModalFooterEl = this.todoEditModalEl.element(by.id('modalFooter'));
   this.modalBtns = this.todoEditModalFooterEl.all(by.id('modalBtn'));
+
+  this.adminUserListEl = element(by.css('[class=list-group]'));
+  this.userNameStrongEl = function(ind) {
+    return this.adminUserListEl.all(by.css('strong')).get(ind);
+  }
 };
 
 module.exports = new MainPage();

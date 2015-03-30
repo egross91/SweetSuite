@@ -1,38 +1,44 @@
 'use strict';
 
 describe('Main View', function() {
-  var page, clientLoginSetup, adminLoginSetup, logoutTearDown, signupSetup;
-
-  clientLoginSetup = function() {
-    page.loginEl.click();
-    page.emailEl.sendKeys('test@test.com');
-    page.passwordEl.sendKeys('test');
-    page.loginBtnEl.click();
-  };
-
-  adminLoginSetup = function() {
-    page.loginEl.click();
-    page.emailEl.sendKeys('admin@admin.com');
-    page.passwordEl.sendKeys('admin');
-    page.loginBtnEl.click();
-  };
-
-  signupSetup = function() {
-    page.signupEl.click();
-    page.signupNameEl.sendKeys('Alain Dobra');
-    page.signupEmailEl.sendKeys('real@user.com');
-    page.signupPasswordEl.sendKeys('password');
-    page.signupBtnEl.click();
-  };
-
-  logoutTearDown = function() {
-    page.navbarEl.element(by.id('logout')).click();
-  };
+  var page
+    , loginUser
+    , logout
+    , registerUser;
+    //, waitUntilReady;
 
   beforeEach(function() {
     browser.get('/');
     page = require('./main.po');
   });
+
+  loginUser = function(email, password) {
+    page.loginEl.click();
+    page.emailEl.sendKeys(email);
+    page.passwordEl.sendKeys(password);
+    page.loginBtnEl.click();
+  };
+
+  registerUser = function(name, email, password) {
+    page.signupEl.click();
+    page.signupNameEl.sendKeys(name);
+    page.signupEmailEl.sendKeys(email);
+    page.signupPasswordEl.sendKeys(password);
+    page.signupBtnEl.click();
+  };
+
+  logout = function() {
+    page.navbarEl.element(by.id('logout')).click();
+  };
+
+  //waitUntilReady = function(el) {
+  //  browser.wait(function() {
+  //    return el.isPresent();
+  //  }, 2000);
+  //  browser.wait(function() {
+  //    return el.isDisplayed();
+  //  }, 2000);
+  //};
 
   it('should include jumbotron with correct data', function() {
     expect(page.h1El.getText()).toBe('Howdy!');
@@ -45,54 +51,52 @@ describe('Main View', function() {
   });
 
   it('should successfully signup', function() {
-    signupSetup();
+    registerUser('Alain Dobra', 'real@user.com', 'password');
     page.myListsEl.click();
     expect(page.myListsEl.getText()).toBe('My Lists');
     page.goHomeEl.click();
-    logoutTearDown();
+    logout();
   });
 
   it('should successfully log in to admin page and traverse navbar options', function() {
-    adminLoginSetup();
+    loginUser('admin@admin.com', 'admin');
     page.adminManageTodos.click();
     page.adminManageUsers.click();
-    logoutTearDown();
+    logout();
   });
 
   it('should reflect admin list changes on the client', function() {
-    adminLoginSetup();
+    loginUser('admin@admin.com', 'admin');
     page.adminManageTodos.click();
-
-
-    logoutTearDown();
+    logout();
   });
 
   it('should login the user in and take them to the client page with the base elements showing', function() {
-    clientLoginSetup();
+    loginUser('test@test.com', 'test');
 
     expect(page.viewTodoListsBtn.getText()).toBe('View Lists');
     expect(page.viewExampleListBtn.getText()).toBe('View Example List');
     expect(page.hideListsBtn.getText()).toBe('Hide All');
 
-    logoutTearDown();
+    logout();
   });
 
   it('should allow the user to view the example list', function() {
-    clientLoginSetup();
+    loginUser('test@test.com', 'test');
 
-    expect(page.thingListContainerEl).toBeTruthy();
+    expect(page.todoListContainerEl).toBeTruthy();
 
     /* click the example list */
     page.viewExampleListBtn.click();
     expect(page.exampleListImg).toBeTruthy();
 
-    logoutTearDown();
+    logout();
   });
 
   it('should hide all lists when the "Hide All" button is clicked', function() {
-    clientLoginSetup();
+    loginUser('test@test.com', 'test');
 
-    expect(page.thingListContainerEl).toBeTruthy();
+    expect(page.todoListContainerEl).toBeTruthy();
 
     /* click view lists and view example lists */
 
@@ -102,30 +106,42 @@ describe('Main View', function() {
     page.hideListsBtn.click();
     /* TODO: make sure lists are gone */
 
-    logoutTearDown();
+    logout();
   });
 
   it('should allow the user to click a todo item and edit the description', function() {
-    clientLoginSetup();
+    loginUser('test@test.com', 'test');
 
-    expect(page.thingListContainerEl).toBeTruthy();
+    expect(page.todoListContainerEl).toBeTruthy();
 
-    /* Make the todo list visible & has 3 elements. */
+    /* Click Test User's accordion */
+    var testUserTodoList = page.userTodoListEl(0);
+
     page.viewTodoListsBtn.click();
-    page.testUserUserAccordionEl.click();
-    page.userTestTodoListEl.click();
-    expect(page.userTestTodoListTodosEl.count()).toBe(3);
-    page.userTestTodoListTodosEl.get(0).click();
+    expect(testUserTodoList.getText()).toBe('Test User | test@test.com');
+    testUserTodoList.element(by.css('[class=accordion-toggle]')).click();
+    expect(testUserTodoList.all(by.css('[class=accordion-toggle]')).get(1).getText()).toBe('House');
+    testUserTodoList.all(by.css('[class=accordion-toggle]')).get(1).click();
+    testUserTodoList.all(by.repeater('todo in todoList.todos')).count().then(function(count) {
+      /* -1 because it counts the title of the accordion as well. */
+      expect(count-1).toBe(3);
+    });
 
     /* Check the modal and its contents. */
-    expect(page.todoEditModalEl).toBeTruthy();
-    expect(page.todoDescriptionLbl).toBeTruthy();
-    expect(page.todoEditModalFooterEl).toBeTruthy();
+    //expect(page.todoEditModalEl).toBeTruthy();
+    //expect(page.todoDescriptionLbl).toBeTruthy();
+    //expect(page.todoEditModalFooterEl).toBeTruthy();
 
     /* Close the modal to logout. */
-    page.modalBtns.get(0).click();
+    //page.modalBtns.get(0).click();
 
-    logoutTearDown();
+    logout();
   });
+  it('ensure that maid promotion works', function() {
+    registerUser('Maide Maid', 'maid@maid.com', 'maid');
+    logout();
 
+    loginUser('admin@admin.com', 'admin');
+    expect(page.userNameStrongEl(3).getText()).toBe('Maide Maid');
+  });
 });

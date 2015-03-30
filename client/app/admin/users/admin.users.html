@@ -3,7 +3,7 @@
 <div class="container">
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
+        <strong id="strong{{user.name}}">{{user.name}}</strong><br>
         <span class="text-muted">{{user.email}}</span>
         <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeAdmin(user)" class="plus" title="make admin"><span class="glyphicon glyphicon-globe pull-right"></span></a>
         <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeMaid(user)" class="plus" title="make maid"><span class="glyphicon glyphicon-bell pull-right"></span></a>
