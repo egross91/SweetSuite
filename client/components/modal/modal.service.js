@@ -24,11 +24,11 @@ angular.module('sweetSuiteApp')
 
     function getPriorityString(priority) {
       switch(priority) {
-        case "1":
+        case "3":
               return 'High Priority';
         case "2":
               return 'Medium Priority';
-        case "3":
+        case "1":
               return 'Low Priority';
         default:
               return 'Default';
@@ -74,7 +74,7 @@ angular.module('sweetSuiteApp')
             viewModal.result.then(function(event) {
               var modifiedDesc = document.getElementById('modalHtmlTextArea')
                 , resultDesc = null
-                , newPriority = document.getElementById('todoDisplayPriority')
+                , newPriority = document.getElementsByName('newTodoPriority')[1]
                 , resultPriority;
 
               if (modifiedDesc) {
