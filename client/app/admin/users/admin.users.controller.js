@@ -23,13 +23,15 @@ angular.module('sweetSuiteApp')
         });
     };
 
-    $scope.delete = function(user) {
-      User.remove({ id: user._id });
-      angular.forEach($scope.users, function(u, i) {
-        if (u === user) {
-          $scope.users.splice(i, 1);
-        }
-      });
+    $scope.deleteUser = function(user) {
+      if(confirm('Are you sure you want to delete this user?')) {
+        User.remove({id: user._id});
+        angular.forEach($scope.users, function (u, i) {
+          if (u === user) {
+            $scope.users.splice(i, 1);
+          }
+        });
+      }
     };
 
     $scope.isAdmin = function(user) {
@@ -45,12 +47,12 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.makeMaid= function(user){
-      changeRole('maid',user);
-      angular.forEach($scope.users, function(u, i) {
-        if (u === user) {
-          $scope.users[i].role = 'maid';
-        }
-      });
+        changeRole('maid',user);
+        angular.forEach($scope.users, function(u, i) {
+          if (u === user) {
+            $scope.users[i].role = 'maid';
+          }
+        });
     };
 
     $scope.demoteMaid = function(maid){
@@ -63,12 +65,14 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.makeAdmin = function(user) {
-      changeRole('admin', user);
-      angular.forEach($scope.users, function(u, i) {
-        if (u === user) {
-          $scope.users[i].role = 'admin';
+        if(confirm('Are you sure you want to make this user an admin?')) {
+          changeRole('admin', user);
+          angular.forEach($scope.users, function (u, i) {
+            if (u === user) {
+              $scope.users[i].role = 'admin';
+            }
+          });
         }
-      });
     };
 
     $scope.demoteAdmin = function(admin) {
