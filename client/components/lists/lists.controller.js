@@ -113,16 +113,18 @@ angular.module('sweetSuiteApp')
     };
 
     $scope.deleteList = function(client, list) {
-      angular.forEach($scope.clients, function(c, clientIndex) {
-        if (c._id === client._id) {
-          angular.forEach($scope.clients[clientIndex].lists, function(l, listIndex) {
-            if (list.$$hashKey === l.$$hashKey) {
-              $scope.clients[clientIndex].lists.splice(listIndex, 1);
-              Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
-            }
-          });
-        }
-      });
+      if (confirm('Are you sure you want to delete the list?')) {
+        angular.forEach($scope.clients, function (c, clientIndex) {
+          if (c._id === client._id) {
+            angular.forEach($scope.clients[clientIndex].lists, function (l, listIndex) {
+              if (list.$$hashKey === l.$$hashKey) {
+                $scope.clients[clientIndex].lists.splice(listIndex, 1);
+                Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
+              }
+            });
+          }
+        });
+      }
     };
 
     $scope.deleteTodo = function(client, todoList, todo) {
