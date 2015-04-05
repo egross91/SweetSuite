@@ -1,0 +1,13 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="maid in maids">
+      <strong id="strong{{maid.name}}">{{maid.name}}</strong><br>
+      <span class="text-muted">{{maid.email}}</span>
+
+    </li>
+  </ul>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

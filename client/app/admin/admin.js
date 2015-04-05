@@ -14,5 +14,12 @@ angular.module('sweetSuiteApp')
         templateUrl: 'app/admin/todos/admin.todos.html',
         controller: 'AdminTodosCtrl',
         authenticate: true
+      })
+
+      .state('admin/maids', {
+        url: '/admin/maids',
+        templateUrl: 'app/admin/maids/admin.maids.html',
+        controller: 'AdminMaidsCtrl',
+        authenticate: true
       });
   });
