@@ -10,12 +10,17 @@ var MainPage = function() {
   this.h1El = this.heroEl.element(by.css('h1'));
   this.imgEl = this.heroEl.element(by.css('img'));
 
+  this.footerEl = element(by.css('.footer'));
+  this.contactEl = this.footerEl.element(by.css('a'));
+
   this.navbarEl = element(by.id('navbar-main'));
   this.loginEl = this.navbarEl.element(by.id('login'));
   this.signupEl = this.navbarEl.element(by.id('signup'));
-  this.howitworksEl = this.navbarEl.element(by.id('howItWorks'));
   this.myListsEl = this.navbarEl.element(by.id('myLists'));
   this.goHomeEl = element(by.id('sweetsuite'));
+
+  this.howitworksEl = this.navbarEl.element(by.id('howItWorks'));
+
   // admin specific
   this.adminManageTodos = this.navbarEl.element(by.id('manageTodos'));
   this.adminManageUsers = this.navbarEl.element(by.id('manageUsers'));

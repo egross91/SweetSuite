@@ -7,15 +7,23 @@ angular.module('sweetSuiteApp')
     $scope.changePassword = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
-        Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
-        .then( function() {
-          $scope.message = 'Password successfully changed.';
-        })
-        .catch( function() {
+        if($scope.user.confirmNewPassword != $scope.user.newPassword) {
           form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
-        });
+          $scope.message = 'Passwords Do Not Match';
+          $scope.errors.other = '';
+        }
+        else {
+          Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
+            .then( function() {
+              $scope.message = 'Password Successfully Changed';
+              $scope.newPassword = '';
+            })
+            .catch( function() {
+              form.password.$setValidity('mongoose', false);
+              $scope.errors.other = 'Incorrect Password';
+              $scope.message = '';
+            });
+        }
       }
 		};
   });

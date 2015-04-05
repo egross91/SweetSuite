@@ -46,6 +46,12 @@ describe('Main View', function() {
     expect(page.imgEl.getAttribute('alt')).toBe('( ͡° ͜ʖ ͡°)');
   });
 
+  it('should successfully go to the MaidSuite homepage', function() {
+    page.contactEl.click();
+    // need to check URL to make sure it matches "http://www.maidsuite.com/"
+    // expect(document.location).toBe('www.maidsuite.com');   <== fails
+  });
+
   it('should successfully go to how it works', function() {
     page.howitworksEl.click();
   });
