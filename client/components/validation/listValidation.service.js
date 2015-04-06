@@ -13,7 +13,7 @@ angular.module('sweetSuiteApp')
         var names = _.pluck(list, prop)
           , ii;
         for (ii = 0; ii < names.length; ++ii) {
-          if (name === names[ii]) {
+          if (name.toLowerCase() === names[ii].toLowerCase()) {
             return true;
           }
         }
@@ -21,7 +21,7 @@ angular.module('sweetSuiteApp')
       },
 
       isFalsy: function(text) {
-        return (!text || text.trim() === '');
+        return (!text || text.trim() === ''); 
       }
     };
   });

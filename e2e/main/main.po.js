@@ -16,6 +16,7 @@ var MainPage = function() {
   this.navbarEl = element(by.id('navbar-main'));
   this.loginEl = this.navbarEl.element(by.id('login'));
   this.signupEl = this.navbarEl.element(by.id('signup'));
+  this.settingsEl = this.navbarEl.element(by.id('settings'));
   this.myListsEl = this.navbarEl.element(by.id('myLists'));
   this.goHomeEl = element(by.id('sweetsuite'));
 
@@ -36,6 +37,12 @@ var MainPage = function() {
   this.signupEmailEl = this.signupFormEl.element(by.id('email'));
   this.signupPasswordEl = this.signupFormEl.element(by.id('password'));
   this.signupBtnEl = this.signupFormEl.element(by.id('signupBtn'));
+
+  this.changepasswordFormEl = element(by.name('changepasswordform'));
+  this.changepasswordCurrentEl = this.changepasswordFormEl.element(by.id('password'));
+  this.changepasswordNewEl = this.changepasswordFormEl.element(by.id('newPassword'));
+  this.changepasswordNewOtherEl = this.changepasswordFormEl.element(by.id('confirmNewPassword'));
+  this.changepasswordBtnEl = this.changepasswordFormEl.element(by.id('passwordBtn'));
 
   this.exampleListImg = element(by.id('exampleListImg'));
 
