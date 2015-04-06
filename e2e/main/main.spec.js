@@ -4,7 +4,8 @@ describe('Main View', function() {
   var page
     , loginUser
     , logout
-    , registerUser;
+    , registerUser
+    , changePassword;
     //, waitUntilReady;
 
   beforeEach(function() {
@@ -31,6 +32,14 @@ describe('Main View', function() {
     page.navbarEl.element(by.id('logout')).click();
   };
 
+  changePassword = function(curpass, newpass) {
+    page.settingsEl.click();
+    page.changepasswordCurrentEl.sendKeys(curpass);
+    page.changepasswordNewEl.sendKeys(newpass);
+    page.changepasswordNewOtherEl.sendKeys(newpass);
+    page.changepasswordBtnEl.click();
+  };
+
   //waitUntilReady = function(el) {
   //  browser.wait(function() {
   //    return el.isPresent();
@@ -39,6 +48,31 @@ describe('Main View', function() {
   //    return el.isDisplayed();
   //  }, 2000);
   //};
+
+  it('should change the users password', function() {
+    //log in initially
+    loginUser('test@test.com', 'test');
+
+    //change password:
+    changePassword('test', 'sup');
+
+    //log out
+    logout();
+
+    //log back in
+    loginUser('test@test.com', 'sup');
+
+    //make sure client stuff is there
+    expect(page.viewTodoListsBtn.getText()).toBe('View Lists');
+    expect(page.viewExampleListBtn.getText()).toBe('View Example List');
+    expect(page.hideListsBtn.getText()).toBe('Hide All');
+
+    //change back
+    changePassword('sup', 'test');
+
+    //log out
+    logout();
+  });
 
   it('should include jumbotron with correct data', function() {
     expect(page.h1El.getText()).toBe('Howdy!');

@@ -12,7 +12,7 @@
         <div class="form-group">
           <label>Current Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+          <input type="password" id="password" name="password" class="form-control" ng-model="user.oldPassword"
                  mongoose-error/>
           <p class="help-block" ng-show="form.password.$error.mongoose">
               {{ errors.other }}
@@ -22,7 +22,7 @@
         <div class="form-group">
           <label>New Password</label>
 
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+          <input type="password" id="newPassword" name="newPassword" class="form-control" ng-model="user.newPassword"
                  ng-minlength="3"
                  required/>
           <p class="help-block"
@@ -35,7 +35,7 @@
         <div class="form-group">
           <label>Confirm New Password</label>
 
-          <input type="password" name="confirmNewPassword" class="form-control" ng-model="user.confirmNewPassword"
+          <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control" ng-model="user.confirmNewPassword"
             ng-minlength="3"
             required/>
         </div>
