@@ -28,7 +28,7 @@
         <li ng-show="isLoggedIn() && !isMaid() && !isAdmin()"><p class="navbar-text"> Hello {{ getCurrentUser().name }}  </p> </li>
         <li ng-show="isMaid()"><p class="navbar-text"><span class="glyphicon glyphicon-star-empty" style="padding: 2px;"></span> Hello {{ getCurrentUser().name }}  </p> </li>
         <li ng-show="isAdmin()"><p class="navbar-text"><span class="glyphicon glyphicon-star" style="padding: 2px;"></span> Hello {{ getCurrentUser().name }}  </p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a id="settings" href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a id="logout" href="" ng-click="logout()">Logout</a></li>
       </ul>
     </div>

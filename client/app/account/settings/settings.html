@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-12">
       <br><br>
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+      <form class="form" name="changepasswordform" ng-submit="changePassword(changepasswordform)" novalidate>
 
         <div class="form-group">
           <label>Current Password</label>
@@ -42,7 +42,7 @@
 
         <p class="help-block"> {{ message }} </p>
 
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+        <button id="passwordBtn" class="btn btn-lg btn-primary" type="submit">Save changes</button>
       </form>
     </div>
   </div>
