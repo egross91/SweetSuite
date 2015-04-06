@@ -68,6 +68,7 @@ describe('Main View', function() {
     loginUser('admin@admin.com', 'admin');
     page.adminManageTodos.click();
     page.adminManageUsers.click();
+    page.adminManageMaids.click();
     logout();
   });
 

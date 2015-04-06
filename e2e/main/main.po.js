@@ -24,6 +24,7 @@ var MainPage = function() {
   // admin specific
   this.adminManageTodos = this.navbarEl.element(by.id('manageTodos'));
   this.adminManageUsers = this.navbarEl.element(by.id('manageUsers'));
+  this.adminManageMaids = this.navbarEl.element(by.id('manageMaids'));
 
   this.loginFormEl = element(by.name('form'));
   this.emailEl = this.loginFormEl.element(by.name('email'));
