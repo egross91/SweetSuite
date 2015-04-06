@@ -95,14 +95,18 @@ describe('Main View', function() {
     page.myListsEl.click();
     expect(page.myListsEl.getText()).toBe('My Lists');
     page.goHomeEl.click();
+    expect(page.goHomeEl.getText()).toBe('SweetSuite');
     logout();
   });
 
   it('should successfully log in to admin page and traverse navbar options', function() {
     loginUser('admin@admin.com', 'admin');
     page.adminManageTodos.click();
+    expect(page.adminManageTodos.getText()).toBe('Manage Todos');
     page.adminManageUsers.click();
+    expect(page.adminManageUsers.getText()).toBe('Manage Users');
     page.adminManageMaids.click();
+    expect(page.adminManageMaids.getText()).toBe('Assign Maids');
     logout();
   });
 
