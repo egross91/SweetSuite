@@ -91,7 +91,7 @@ describe('Main View', function() {
   });
 
   it('should successfully signup', function() {
-    registerUser('Alain Dobra', 'real@user.com', 'password');
+    registerUser('Alin Dobra', 'real@user.com', 'password');
     page.myListsEl.click();
     expect(page.myListsEl.getText()).toBe('My Lists');
     page.goHomeEl.click();
