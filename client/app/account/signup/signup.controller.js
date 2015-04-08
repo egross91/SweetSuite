@@ -19,6 +19,7 @@ angular.module('sweetSuiteApp')
           $location.path('/');
         })
         .catch( function(err) {
+          alert('User already exists!');
           err = err.data;
           $scope.errors = {};
 
