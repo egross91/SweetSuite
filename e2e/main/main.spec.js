@@ -49,6 +49,14 @@ describe('Main View', function() {
   //  }, 2000);
   //};
 
+  it('should successfully go to the MaidSuite homepage', function() {
+    page.contactEl.click();
+
+    //check to make sure url matches
+    //maidsuite.com doesnt use angular so we must use driver :)
+    expect(browser.driver.getCurrentUrl()).toBe('http://www.maidsuite.com/');
+  });
+
   it('should change the users password', function() {
     //log in initially
     loginUser('test@test.com', 'test');
@@ -78,12 +86,6 @@ describe('Main View', function() {
     expect(page.h1El.getText()).toBe('Howdy!');
     expect(page.imgEl.getAttribute('src')).toMatch(/assets\/images\/MadeSuite.png$/);
     expect(page.imgEl.getAttribute('alt')).toBe('( ͡° ͜ʖ ͡°)');
-  });
-
-  it('should successfully go to the MaidSuite homepage', function() {
-    page.contactEl.click();
-    // need to check URL to make sure it matches "http://www.maidsuite.com/"
-    // expect(document.location).toBe('www.maidsuite.com');   <== fails
   });
 
   it('should successfully go to how it works', function() {
@@ -154,6 +156,15 @@ describe('Main View', function() {
     logout();
   });
 
+  it('ensure that maid promotion works', function() {
+    registerUser('Maide Maid', 'maid@maid.com', 'maid');
+    logout();
+
+    loginUser('admin@admin.com', 'admin');
+    expect(page.userNameStrongEl(3).getText()).toBe('Maide Maid');
+    logout();
+  });
+
   it('should allow the user to click a todo item and edit the description', function() {
     loginUser('test@test.com', 'test');
 
@@ -165,6 +176,7 @@ describe('Main View', function() {
     page.viewTodoListsBtn.click();
     expect(testUserTodoList.getText()).toBe('Test User | test@test.com');
     testUserTodoList.element(by.css('[class=accordion-toggle]')).click();
+    browser.sleep(500); // wait for accordion to unwind
     expect(testUserTodoList.all(by.css('[class=accordion-toggle]')).get(1).getText()).toBe('House');
     testUserTodoList.all(by.css('[class=accordion-toggle]')).get(1).click();
     testUserTodoList.all(by.repeater('todo in todoList.todos')).count().then(function(count) {
@@ -181,12 +193,5 @@ describe('Main View', function() {
     //page.modalBtns.get(0).click();
 
     logout();
-  });
-  it('ensure that maid promotion works', function() {
-    registerUser('Maide Maid', 'maid@maid.com', 'maid');
-    logout();
-
-    loginUser('admin@admin.com', 'admin');
-    expect(page.userNameStrongEl(3).getText()).toBe('Maide Maid');
   });
 });
