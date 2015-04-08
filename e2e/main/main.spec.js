@@ -5,13 +5,19 @@ describe('Main View', function() {
     , loginUser
     , logout
     , registerUser
-    , changePassword;
+    , changePassword
+    , deleteUser;
     //, waitUntilReady;
 
   beforeEach(function() {
     browser.get('/');
     page = require('./main.po');
   });
+
+  deleteUser = function(idx) {
+    page.adminUserListEl.all(by.repeater('user in users')).get(idx).element(by.id('deleteUser')).click();
+    browser.switchTo().alert().accept();
+  };
 
   loginUser = function(email, password) {
     page.loginEl.click();
@@ -48,6 +54,31 @@ describe('Main View', function() {
   //    return el.isDisplayed();
   //  }, 2000);
   //};
+
+  it('should hide all lists when the "Hide All" button is clicked', function() {
+    loginUser('test@test.com', 'test');
+
+    expect(page.todoListContainerEl).toBeTruthy();
+
+    /* click view lists and view example lists */
+    page.viewClientTodoListsBtn.click();
+    page.viewExampleListBtn.click();
+
+    //check if example list is displayed
+    expect(page.exampleListImg.isDisplayed()).toBeTruthy();
+
+    //check if client todo list is displayed
+    expect(page.todoListContainerThingy.isDisplayed()).toBeTruthy();
+
+    //click hide lists
+    page.hideListsBtn.click();
+
+    //make sure list stuff is gone:
+    expect(page.exampleListImg.isDisplayed()).toBeFalsy();
+    expect(page.todoListContainerThingy.isDisplayed()).toBeFalsy();
+
+    logout();
+  });
 
   it('should successfully go to the MaidSuite homepage', function() {
     page.contactEl.click();
@@ -99,6 +130,13 @@ describe('Main View', function() {
     page.goHomeEl.click();
     expect(page.goHomeEl.getText()).toBe('SweetSuite');
     logout();
+
+    loginUser('admin@admin.com', 'admin');
+
+    expect(page.userNameStrongEl(2).getText()).toBe('Alin Dobra');
+    deleteUser(2);
+
+    logout();
   });
 
   it('should successfully log in to admin page and traverse navbar options', function() {
@@ -140,28 +178,15 @@ describe('Main View', function() {
     logout();
   });
 
-  it('should hide all lists when the "Hide All" button is clicked', function() {
-    loginUser('test@test.com', 'test');
-
-    expect(page.todoListContainerEl).toBeTruthy();
-
-    /* click view lists and view example lists */
-
-    page.viewClientTodoListsBtn.click();
-    page.viewExampleListBtn.click();
-    /* TODO: Check that lists are there */
-    page.hideListsBtn.click();
-    /* TODO: make sure lists are gone */
-
-    logout();
-  });
-
   it('ensure that maid promotion works', function() {
     registerUser('Maide Maid', 'maid@maid.com', 'maid');
     logout();
 
     loginUser('admin@admin.com', 'admin');
-    expect(page.userNameStrongEl(3).getText()).toBe('Maide Maid');
+
+    expect(page.userNameStrongEl(2).getText()).toBe('Maide Maid');
+    deleteUser(2);
+
     logout();
   });
 

@@ -52,6 +52,8 @@ var MainPage = function() {
   this.viewExampleListBtn = this.clientBtnListEl.element(by.id('viewExampleListBtn'));
   this.hideListsBtn = this.clientBtnListEl.element(by.id('hideListsBtn'));
 
+  this.todoListContainerThingy = element(by.id('todoContainer'))
+
   this.todoListContainerEl = element(by.css('[id=todoContainer]')).all(by.repeater('client in clients'));
   this.userTodoListEl = function(ind) {
     return this.todoListContainerEl.get(ind);
@@ -70,6 +72,9 @@ var MainPage = function() {
   this.adminUserListEl = element(by.css('[class=list-group]'));
   this.userNameStrongEl = function(ind) {
     return this.adminUserListEl.all(by.css('strong')).get(ind);
+  }  
+  this.deleteUserEl = function(ind) {
+    return this.adminUserListEl.all(by.repeater('user in users')).get(ind);
   }
 };
 
