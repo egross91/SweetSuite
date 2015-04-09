@@ -21,6 +21,8 @@ describe('Main View', function() {
 
   loginUser = function(email, password) {
     page.loginEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/login');
     page.emailEl.sendKeys(email);
     page.passwordEl.sendKeys(password);
     page.loginBtnEl.click();
@@ -28,6 +30,8 @@ describe('Main View', function() {
 
   registerUser = function(name, email, password) {
     page.signupEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/signup');
     page.signupNameEl.sendKeys(name);
     page.signupEmailEl.sendKeys(email);
     page.signupPasswordEl.sendKeys(password);
@@ -40,6 +44,8 @@ describe('Main View', function() {
 
   changePassword = function(curpass, newpass) {
     page.settingsEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/settings');
     page.changepasswordCurrentEl.sendKeys(curpass);
     page.changepasswordNewEl.sendKeys(newpass);
     page.changepasswordNewOtherEl.sendKeys(newpass);
@@ -56,8 +62,10 @@ describe('Main View', function() {
   //};
 
   it('should hide all lists when the "Hide All" button is clicked', function() {
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
     loginUser('test@test.com', 'test');
-
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/client');
     expect(page.todoListContainerEl).toBeTruthy();
 
     /* click view lists and view example lists */
@@ -91,7 +99,8 @@ describe('Main View', function() {
   it('should change the users password', function() {
     //log in initially
     loginUser('test@test.com', 'test');
-
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/client');
     //change password:
     changePassword('test', 'sup');
 
@@ -121,21 +130,29 @@ describe('Main View', function() {
 
   it('should successfully go to how it works', function() {
     page.howitworksEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/how');
   });
 
   it('should successfully signup', function() {
     registerUser('Alin Dobra', 'real@user.com', 'password');
     page.myListsEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/client');
     expect(page.myListsEl.getText()).toBe('My Lists');
     page.goHomeEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
     expect(page.goHomeEl.getText()).toBe('SweetSuite');
     logout();
 
     loginUser('admin@admin.com', 'admin');
-
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/admin/users');
     expect(page.userNameStrongEl(2).getText()).toBe('Alin Dobra');
     deleteUser(2);
-
+    page.goHomeEl.click();
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
     logout();
   });
 
