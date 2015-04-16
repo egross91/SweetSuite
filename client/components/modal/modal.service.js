@@ -75,7 +75,8 @@ angular.module('sweetSuiteApp')
               var modifiedDesc = document.getElementById('modalHtmlTextArea')
                 , resultDesc = null
                 , newPriority = document.getElementsByName('newTodoPriority')[1]
-                , resultPriority;
+                , resultPriority
+                , isDone;
 
               if (modifiedDesc) {
                 resultDesc = modifiedDesc.value;
@@ -88,8 +89,9 @@ angular.module('sweetSuiteApp')
               }
 
               resultPriority = (!newPriority.options[newPriority.selectedIndex].value) ? 1 : newPriority.options[newPriority.selectedIndex].value;
-
-              callback.apply(event, [resultDesc.trim(), resultPriority]);
+              isDone = document.getElementById(isDone);
+              /* TODO Update isDone (true/false value) */
+              callback.apply(event, [resultDesc.trim(), resultPriority, isDone]);
             });
           }
         },

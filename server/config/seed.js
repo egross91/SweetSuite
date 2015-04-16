@@ -39,12 +39,12 @@ User.find({}).remove(function() {
     password: 'test',
     lists: [
             {title: 'House',
-             todos: [{name: 'The Lawn', info: 'There\'s garbage all over the lawn that needs to be picked up.', priority: "3"},
-                     {name: 'The Trash', info: 'Please place the recyclables in the green can outside. Place the rest of the garbage in the black can.', priority: "3"},
-                     {name: 'The Kitchen', info: 'All food left out needs to be disposed off. There are a few dishes that need to be washed.', priority: "1"}]
+             todos: [{name: 'The Lawn', info: 'There\'s garbage all over the lawn that needs to be picked up.', priority: "3", isDone: true},
+                     {name: 'The Trash', info: 'Please place the recyclables in the green can outside. Place the rest of the garbage in the black can.', priority: "3", isDone: false},
+                     {name: 'The Kitchen', info: 'All food left out needs to be disposed off. There are a few dishes that need to be washed.', priority: "1", isDone: true}]
             },
             {title: 'Guest House',
-             todos: [{name: 'Bedrooms', info : 'All beds need to be made. Carpets in all bedrooms must be vacuumed', priority: "2"}]
+             todos: [{name: 'Bedrooms', info : 'All beds need to be made. Carpets in all bedrooms must be vacuumed', priority: "2", isDone: false}]
     }]
   }, {
     provider: 'local',
