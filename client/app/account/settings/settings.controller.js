@@ -20,8 +20,8 @@ angular.module('sweetSuiteApp')
             })
             .catch( function() {
               form.password.$setValidity('mongoose', false);
-              $scope.errors.other = 'Incorrect Password';
-              $scope.message = '';
+              $scope.message = 'Incorrect Password';
+              $scope.errors.other = '';
             });
         }
       }
