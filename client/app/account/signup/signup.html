@@ -41,7 +41,7 @@
                                             'has-error': form.password.$invalid && submitted }">
           <label>Password</label>
 
-          <input type="password" id="password" class="form-control" ng-model="user.password"
+          <input type="password" onfocus="this.value=''" id="password" class="form-control" ng-model="user.password"
                  ng-minlength="3"
                  required
                  mongoose-error/>
