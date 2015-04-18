@@ -54,6 +54,22 @@
           </p>
         </div>
 
+        <div class="form-group" ng-class="{ 'has-success': form.role.$valid && submitted,
+                                            'has-error': form.role.$invalid && submitted }">
+
+          <label>Please choose type of account to register as</label>
+      
+          <input type="radio" id="client" value="user" class="radio-inline" ng-model="user.role"
+                 required/>
+          Client
+          <input type="radio" id="maid" value="maid" class="radio-inline" ng-model="user.role"
+                 required/>
+          Maid
+          <p class="help-block" ng-show="form.role.$error.required && submitted">
+            A role is required
+          </p>
+        </div>        
+
         <div>
           <button id="signupBtn"class="btn btn-inverse btn-lg btn-login" type="submit">
             Sign up
