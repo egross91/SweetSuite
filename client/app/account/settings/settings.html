@@ -11,7 +11,7 @@
 
         <div class="form-group">
           <label>Current Password</label>
-          <input type="password" onfocus="this.value=''" id="password" name="password" class="form-control" ng-model="user.oldPassword" mongoose-error/>
+          <input type="password" autofocus onfocus="this.value=''" id="password" name="password" class="form-control" ng-model="user.oldPassword" mongoose-error/>
           <p class="help-block" ng-show="form.password.$error.mongoose">
               {{ errors.other }}
           </p>
