@@ -64,7 +64,7 @@ describe('Main View', function() {
   it('should hide all lists when the "Hide All" button is clicked', function() {
     expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
     loginUser('test@test.com', 'test');
-    browser.sleep(500);
+    browser.sleep(1000);
     expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/client');
     expect(page.todoListContainerEl).toBeTruthy();
 
