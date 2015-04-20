@@ -96,13 +96,15 @@ angular.module('sweetSuiteApp')
       // Show the modal if user didn't click the delete 'x'.
       if ($scope.showModal) {
         // Callback function to grab the text from the modal and store it into the appropriate thing.
-        Modal.edit.todo(function(todoDesc, todoPriority) {
+        Modal.edit.todo(function(todoDesc, todoPriority, isTodoDone) {
           if (ListValidation.isFalsy(todoPriority)) {
             alert('Need to set a priority.');
             return;
           }
           $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].info = todoDesc;
           $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].priority = todoPriority;
+
+          $scope.clients[clientIndex].lists[listIndex].todos[todoIndex].isDone = isTodoDone;
 
           Auth.updateUserLists($scope.clients[clientIndex], $scope.clients[clientIndex].lists);
         }, $scope.clients[clientIndex].lists[listIndex].todos[todoIndex], size).apply();

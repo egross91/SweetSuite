@@ -54,6 +54,7 @@ angular.module('sweetSuiteApp')
                 description: 'Todo Description',
                 textarea: true,
                 isTodo: true,
+                isDone: thing.isDone,
                 priority: getPriorityString(thing.priority),
                 buttons: [{
                   classes: 'btn-info',
@@ -76,7 +77,8 @@ angular.module('sweetSuiteApp')
                 , resultDesc = null
                 , newPriority = document.getElementsByName('newTodoPriority')[1]
                 , resultPriority
-                , isDone;
+                , isTodoDone = document.getElementById('isDone')
+                , newIsTodoDone;
 
               if (modifiedDesc) {
                 resultDesc = modifiedDesc.value;
@@ -89,9 +91,9 @@ angular.module('sweetSuiteApp')
               }
 
               resultPriority = (!newPriority.options[newPriority.selectedIndex].value) ? 1 : newPriority.options[newPriority.selectedIndex].value;
-              isDone = document.getElementById(isDone);
+              newIsTodoDone = isTodoDone.checked;
               /* TODO Update isDone (true/false value) */
-              callback.apply(event, [resultDesc.trim(), resultPriority, isDone]);
+              callback.apply(event, [resultDesc.trim(), resultPriority, newIsTodoDone]);
             });
           }
         },
