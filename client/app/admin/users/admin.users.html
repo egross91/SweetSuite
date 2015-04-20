@@ -9,7 +9,7 @@
         <!-- Make a User an Admin -->
         <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeAdmin(user)" class="plus" title="Make Admin"><span class="glyphicon glyphicon-globe pull-right"></span></a>
         <!-- Make a User a Maid -->
-        <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeMaid(user)" class="plus" title="Make Maid"><span class="fa fa-paint-brush pull-right"></span></a>
+        <a ng-show="!isAdmin(user) && !isMaid(user)" ng-click="makeMaid(user)" class="plus" title="Make Maid"><span class="glyphicon glyphicon-bell pull-right"></span></a>
         <!-- Make an Admin to User -->
         <a ng-show="isAdmin(user) && !isCurrentUser(user)" ng-click="demoteAdmin(user)" class="minus" title="Demote Admin to User"><span class="glyphicon glyphicon-minus-sign pull-right"></span></a>
         <!-- Make a Maid a User -->
