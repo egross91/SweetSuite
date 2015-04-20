@@ -18,7 +18,7 @@
         <li ng-show="isLoggedIn() && !isMaid() && !isAdmin()" ng-class="{active: isActive('/client')}"><a id="myLists"href="/client">My Lists</a></li>
         <li ng-show="isLoggedIn() && isMaid() && !isAdmin()" ng-class="{active: isActive('/maid')}"><a id="viewLists"href='/maid'>View Lists</a></li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/users')}"><a id="manageUsers"href="/admin/users">Manage Users</a></li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/todos')}"><a id="manageTodos"href="/admin/todos">Manage Todos</a></li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/todos')}"><a id="manageTodos"href="/admin/todos">Manage Todo Lists</a></li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin/maids')}"><a id="manageMaids"href="/admin/maids">Assign Maids</a></li>
       </ul>
 

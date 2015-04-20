@@ -2,7 +2,7 @@
 
 <div class="container">
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="user in users">
+    <li class="list-group-item" ng-repeat="user in users | orderBy: 'role'">
         <strong id="strong{{user.name}}">{{user.name}}</strong><br>
         <span class="text-muted">Account Type - {{user.role}}</span><br>
         <span class="text-muted">{{user.email}}</span>
