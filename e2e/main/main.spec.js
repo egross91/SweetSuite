@@ -28,13 +28,19 @@ describe('Main View', function() {
     page.loginBtnEl.click();
   };
 
-  registerUser = function(name, email, password) {
+  registerUser = function(name, email, password, role) {
     page.signupEl.click();
     browser.sleep(500);
     expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/signup');
     page.signupNameEl.sendKeys(name);
     page.signupEmailEl.sendKeys(email);
     page.signupPasswordEl.sendKeys(password);
+    if (role == "client"){
+      page.signupClientBtnEl.click();
+    }
+    if (role == "maid"){
+      page.signupMaidBtnEl.click();
+    }
     page.signupBtnEl.click();
   };
 
@@ -135,7 +141,7 @@ describe('Main View', function() {
   });
 
   it('should successfully signup', function() {
-    registerUser('Alin Dobra', 'real@user.com', 'password');
+    registerUser('Alin Dobra', 'real@user.com', 'password', 'client');
     page.myListsEl.click();
     browser.sleep(500);
     expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/client');
@@ -159,7 +165,7 @@ describe('Main View', function() {
   it('should successfully log in to admin page and traverse navbar options', function() {
     loginUser('admin@admin.com', 'admin');
     page.adminManageTodos.click();
-    expect(page.adminManageTodos.getText()).toBe('Manage Todos');
+    expect(page.adminManageTodos.getText()).toBe('Manage Todo Lists');
     page.adminManageUsers.click();
     expect(page.adminManageUsers.getText()).toBe('Manage Users');
     page.adminManageMaids.click();
@@ -196,14 +202,15 @@ describe('Main View', function() {
   });
 
   it('ensure that maid promotion works', function() {
-    registerUser('Maide Maid', 'maid@maid.com', 'maid');
+    registerUser('Maide Maid', 'maid@maid.com', 'maid', 'maid');
     logout();
 
     loginUser('admin@admin.com', 'admin');
 
-    expect(page.userNameStrongEl(2).getText()).toBe('Maide Maid');
-    deleteUser(2);
-
+    expect(page.userNameStrongEl(1).getText()).toBe('Maide Maid');
+    //browser.sleep(2000);
+    deleteUser(1);
+    //browser.sleep(2000);
     logout();
   });
 

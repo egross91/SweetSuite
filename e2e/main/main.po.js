@@ -36,6 +36,8 @@ var MainPage = function() {
   this.signupNameEl = this.signupFormEl.element(by.id('name'));
   this.signupEmailEl = this.signupFormEl.element(by.id('email'));
   this.signupPasswordEl = this.signupFormEl.element(by.id('password'));
+  this.signupClientBtnEl = this.signupFormEl.element(by.id('client'));
+  this.signupMaidBtnEl = this.signupFormEl.element(by.id('maid'));
   this.signupBtnEl = this.signupFormEl.element(by.id('signupBtn'));
 
   this.changepasswordFormEl = element(by.name('changepasswordform'));
