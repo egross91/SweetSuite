@@ -13,8 +13,8 @@ var MainPage = function() {
   this.imgEl = this.heroEl.element(by.css('img'));
 
   this.footerEl = element(by.css('.footer'));
-  this.contactEl = this.footerEl.element(by.css('a'));
-  this.meanjsEl = this.footerEl.element(by.css('a'));
+  this.contactEl = this.footerEl.element(by.id('maidclick'));
+  this.meanjsEl = this.footerEl.element(by.id('meanjsclick'));
 
   /* start of nav bar elements */
   this.navbarEl = element(by.id('navbar-main'));

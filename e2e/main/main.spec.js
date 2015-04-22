@@ -7,7 +7,7 @@ describe('Main View', function() {
     , registerUser
     , changePassword
     , deleteUser;
-    , waitUntilReady;
+    //, waitUntilReady;
 
   beforeEach(function() {
     browser.get('/');
@@ -58,14 +58,14 @@ describe('Main View', function() {
     page.changepasswordBtnEl.click();
   };
 
-  waitUntilReady = function(el) {
+/*  waitUntilReady = function(el) {
    browser.wait(function() {
      return el.isPresent();
    }, 2000);
    browser.wait(function() {
      return el.isDisplayed();
    }, 2000);
-  };
+  };*/
 
   it('should hide all lists when the "Hide All" button is clicked', function() {
     expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
@@ -96,6 +96,14 @@ describe('Main View', function() {
 
   it('should successfully go to the MaidSuite homepage', function() {
     page.contactEl.click();
+
+    //check to make sure url matches
+    //meanJs doesnt use angular so we must use driver :)
+    expect(browser.driver.getCurrentUrl()).toBe('http://www.maidsuite.com/');
+  });
+
+  it('should successfully go to the meanjs homepage', function() {
+    page.meanjsEl.click();
 
     //check to make sure url matches
     //meanJs doesnt use angular so we must use driver :)
