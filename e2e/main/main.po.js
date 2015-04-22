@@ -12,6 +12,7 @@ var MainPage = function() {
 
   this.footerEl = element(by.css('.footer'));
   this.contactEl = this.footerEl.element(by.css('a'));
+  this.meanjsEl = this.footerEl.element(by.css('a'));
 
   this.navbarEl = element(by.id('navbar-main'));
   this.loginEl = this.navbarEl.element(by.id('login'));

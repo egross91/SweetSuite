@@ -98,8 +98,8 @@ describe('Main View', function() {
     page.contactEl.click();
 
     //check to make sure url matches
-    //maidsuite.com doesnt use angular so we must use driver :)
-    expect(browser.driver.getCurrentUrl()).toBe('http://www.maidsuite.com/');
+    //meanJs doesnt use angular so we must use driver :)
+    expect(browser.driver.getCurrentUrl()).toBe('http://meanjs.org/');
   });
 
   it('should change the users password', function() {
