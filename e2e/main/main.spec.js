@@ -7,7 +7,7 @@ describe('Main View', function() {
     , registerUser
     , changePassword
     , deleteUser;
-    //, waitUntilReady;
+    , waitUntilReady;
 
   beforeEach(function() {
     browser.get('/');
@@ -58,14 +58,14 @@ describe('Main View', function() {
     page.changepasswordBtnEl.click();
   };
 
-  //waitUntilReady = function(el) {
-  //  browser.wait(function() {
-  //    return el.isPresent();
-  //  }, 2000);
-  //  browser.wait(function() {
-  //    return el.isDisplayed();
-  //  }, 2000);
-  //};
+  waitUntilReady = function(el) {
+   browser.wait(function() {
+     return el.isPresent();
+   }, 2000);
+   browser.wait(function() {
+     return el.isDisplayed();
+   }, 2000);
+  };
 
   it('should hide all lists when the "Hide All" button is clicked', function() {
     expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
