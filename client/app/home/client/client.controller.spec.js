@@ -48,4 +48,11 @@ describe('Controller: ClientCtrl', function() {
   it('should have the $scope.showModal property as the default value', function() {
     expect(scope.showModal).toBe(true);
   });
+
+  it('should be hidden',function(){
+   scope.hideExampleLists();
+    expect(scope.showTodoExampleImage).toBe(false);
+    expect(scope.showTodoExample).toBe(false);
+  });
+
 });

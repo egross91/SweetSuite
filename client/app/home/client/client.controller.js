@@ -25,4 +25,8 @@ angular.module('sweetSuiteApp')
       $scope.showTodoExampleImage = false;
       $scope.showTodoExample = false;
     };
+
+    $scope.returnUser = function(){
+      return User.get();
+    }
   });
