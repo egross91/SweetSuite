@@ -57,7 +57,7 @@
         <div class="form-group" ng-class="{ 'has-success': form.role.$valid && submitted,
                                             'has-error': form.role.$invalid && submitted }">
 
-          <label>Please choose type of account to register as</label>
+          <label>Choose Account Type</label>
       
           <input type="radio" id="client" value="user" class="radio-inline" ng-model="user.role"
                  required/>
@@ -81,12 +81,14 @@
 
         <hr>
         <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+          <a id="facebookSignup" class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
             <i class="fa fa-facebook"></i> Connect with Facebook
           </a>
+          <!--
           <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
             <i class="fa fa-twitter"></i> Connect with Twitter
           </a>
+        -->
         </div>
       </form>
     </div>
