@@ -30,6 +30,7 @@ var MainPage = function() {
   this.loginFormEl = element(by.name('form'));
   this.emailEl = this.loginFormEl.element(by.name('email'));
   this.passwordEl = this.loginFormEl.element(by.name('password'));
+  this.facebookLoginBtnEl = this.loginFormEl.element(by.name('facebookLogin'));
   this.loginBtnEl = this.loginFormEl.element(by.id('loginBtn'));
 
   this.signupFormEl = element(by.name('signupform'));
@@ -38,6 +39,7 @@ var MainPage = function() {
   this.signupPasswordEl = this.signupFormEl.element(by.id('password'));
   this.signupClientBtnEl = this.signupFormEl.element(by.id('client'));
   this.signupMaidBtnEl = this.signupFormEl.element(by.id('maid'));
+  this.facebookSignupBtnEl = this.signupFormEl.element(by.id('facebookSignup'));
   this.signupBtnEl = this.signupFormEl.element(by.id('signupBtn'));
 
   this.changepasswordFormEl = element(by.name('changepasswordform'));

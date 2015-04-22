@@ -243,4 +243,43 @@ describe('Main View', function() {
 
     logout();
   });
+  /*
+  it('should sign user up through facebook and relogin through facebook', function() {
+    //Sign up page, connect with Facebook, test if user
+    page.signupEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/signup');
+    page.facebookSignupBtnEl.click();
+    browser.sleep(3000);
+    page.myListsEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/client');
+    expect(page.myListsEl.getText()).toBe('My Lists');
+    page.goHomeEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
+    expect(page.goHomeEl.getText()).toBe('SweetSuite');
+    logout();
+
+    //Relogin through facebook
+    page.loginEl.click();
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/login');
+    page.facebookLoginBtnEl.click();
+    browser.sleep(3000);
+    logout();
+
+    //Check account through admin
+    loginUser('admin@admin.com', 'admin');
+    browser.sleep(500);
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/admin/users');
+    // IMPORTANT - change name to whoever is demoing
+    expect(page.userNameStrongEl(2).getText()).toBe('Chris Busse'); 
+    browser.sleep(10000);
+    deleteUser(2);
+    page.goHomeEl.click();
+    expect(browser.driver.getCurrentUrl()).toBe('http://localhost:9000/');
+    logout();
+  });
+*/
 });
