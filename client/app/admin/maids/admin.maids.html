@@ -2,11 +2,26 @@
 
 <div class="container">
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="maid in maids | filter: { role: 'maid' }">
-      <strong id="strong{{maid.name}}">{{maid.name}}</strong><br>
-      <span class="text-muted">{{maid.email}}</span>
+    <li class="list-group-item" ng-repeat="maid in filteredMaids = (maids | filter: { role: 'maid' })">
+      	<strong id="strong{{maid.name}}">{{maid.name}}</strong><br>
+      	<span class="text-muted">{{maid.email}}</span>
+      	<!-- Add a User to a Maid's List -->
+		<p class="container-fluid">
+			<form class="thing-form">
+				<labal for="addClient">Add Client</label>
+				<p class="input-group">
+					<input type="text" class="form-control" placeholder="Client's Email Address" ng-model="newClient">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary" ng-click="addClient(maid, newClient)">Add Client</button>
+						</span>
+						
+
+				</p>
+			</form>
+		</p>      	
 
     </li>
+    <li ng-hide="filteredMaids.length" class="list-group-item">No Maids in System</li>
   </ul>
 </div>
 
