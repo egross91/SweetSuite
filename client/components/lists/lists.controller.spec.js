@@ -119,4 +119,21 @@ describe('Controller: ListsCtrl', function() {
     expect(scope.clients[0].lists[0].title).toBe('Guest House');
     expect(oldTitle).toBe('House');
   });
+
+  it('Adding todo properly increases list length ',function(){
+    $httpBackend.flush();
+    setClients(getAllUsers());
+    var oldLength= scope.clients[0].lists[0].todos.length;
+    scope.addTodo(scope.clients[0], scope.clients[0].lists[0], "TEST", "test");
+    expect(oldLength+1).toBe(scope.clients[0].lists[0].todos.length);
+  });
+
+  it('Adding new lists',function(){
+    $httpBackend.flush();
+    setClients(getAllUsers());
+    var title= "myList";
+    scope.clients[0].lists[0].title=title;
+    expect(scope.clients[0].lists[0].title).toBe(title);
+  });
+
 });
